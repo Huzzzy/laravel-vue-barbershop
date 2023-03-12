@@ -1,11 +1,10 @@
 <template>
-    <nav class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 mt-10">
+    <nav class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3">
         <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
             <div class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
-                <a class="text-lg font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white lg:hover:text-gray-300"
-                    href="#">
+                <router-link to="/" class="text-lg font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white lg:hover:text-gray-300 lg:mb-10">
                     Барбершоп
-                </a>
+                </router-link>
                 <label class="btn btn-circle swap swap-rotate bg-zinc-900 lg:hidden">
 
                     <!-- this hidden checkbox controls the state -->
@@ -28,35 +27,31 @@
             </div>
             <div class="lg:flex flex-grow items-center bg-zinc-900 lg:bg-transparent lg:shadow-none"
                 v-bind:class="{ 'hidden': !showMenu, 'block': showMenu }">
-                <ul class="flex flex-col lg:flex-row list-none mr-auto">
-                    <li class="flex items-center">
-                        <a class="text-white lg:hover:text-gray-300 px-3 py-4 lg:py-2 flex items-center text-base uppercase font-bold"
-                            href="#">
+                <ul class="flex flex-col lg:flex-row list-none mr-auto mb-10">
+                    <li class="flex items-center pl-10">
+                        <router-link to="/services" class="text-white lg:hover:text-gray-300 px-3 py-4 lg:py-2 flex items-center text-base uppercase font-bold">
                             Услуги
-                        </a>
+                        </router-link>
                     </li>
-                    <li class="flex items-center">
-                        <a class="text-white lg:hover:text-gray-300 px-3 py-4 lg:py-2 flex items-center text-base uppercase font-bold"
-                            href="#">
+                    <li class="flex items-center pl-10">
+                        <router-link to="/" class="text-white lg:hover:text-gray-300 px-3 py-4 lg:py-2 flex items-center text-base uppercase font-bold">
                             Фотографии
-                        </a>
+                        </router-link>
                     </li>
-                    <li class="flex items-center">
-                        <a class="text-white lg:hover:text-gray-300 px-3 py-4 lg:py-2 flex items-center text-base uppercase font-bold"
-                            href="#">
+                    <li class="flex items-center pl-10">
+                        <router-link to="/" class="text-white lg:hover:text-gray-300 px-3 py-4 lg:py-2 flex items-center text-base uppercase font-bold">
                             Контакты
-                        </a>
+                        </router-link>
                     </li>
-                    <li class="flex items-center">
-                        <a class="text-white lg:hover:text-gray-300 px-3 py-4 lg:py-2 flex items-center text-base uppercase font-bold"
-                            href="#">
+                    <li class="flex items-center pl-10">
+                        <router-link to="/" class="text-white lg:hover:text-gray-300 px-3 py-4 lg:py-2 flex items-center text-base uppercase font-bold">
                             Мастера
-                        </a>
+                        </router-link>
                     </li>
                 </ul>
-                <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
-                    <li class="flex items-center">
-                        <button class="btn btn-outline rounded-none text-white">Записаться</button>
+                <ul class="flex flex-col lg:flex-row list-none lg:ml-auto mb-5">
+                    <li class="flex items-center pl-10 pb-8">
+                        <router-link to="/reservation" class="btn btn-outline rounded-none text-white mt-3 hover:bg-zinc-800">Записаться</router-link>
                     </li>
                 </ul>
             </div>

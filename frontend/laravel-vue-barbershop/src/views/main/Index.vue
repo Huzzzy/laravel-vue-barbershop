@@ -1,16 +1,15 @@
 <template>
     <div>
-        <navbar-component></navbar-component>
         <main>
-            <div class="relative pt-16 pb-32 flex content-center items-center justify-center" style="min-height: 115vh;">
+            <div class="relative pt-16 pb-32 flex content-center items-center justify-center" style="min-height: 100vh;">
                 <div class="absolute top-0 w-full h-full bg-center bg-cover"
                     style='background-image: url("https://i.ibb.co/sFnXbjc/10.jpg");'>
-                    <span id="blackOverlay" class="w-full h-full absolute opacity-75 bg-black"></span>
+                    <span id="blackOverlay" class="w-full h-full absolute opacity-80 bg-black"></span>
                 </div>
                 <div class="container relative mx-auto">
                     <div class="items-center flex flex-wrap">
                         <div class="w-full lg:w-4/6 px-4 ml-auto mr-auto text-center">
-                            <div class="pr-12">
+                            <div class="pr-12 pt-20">
                                 <h1 class="text-white font-normal lg:text-5xl text-4xl">
                                     Здесь ты не просто стрижешься,
                                     ты заботишься о своем стиле!
@@ -28,17 +27,10 @@
                 </div>
             </div>
         </main>
-        <footer-component></footer-component>
     </div>
 </template>
 <script>
-import NavbarComponent from "../../components/Navbar.vue";
-import FooterComponent from "../../components/Footer.vue";
 export default {
-    name: "main-page",
-    components: {
-        NavbarComponent,
-        FooterComponent
-    }
+    name: "Main",
 }
 </script>
