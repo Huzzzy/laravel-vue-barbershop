@@ -23,6 +23,11 @@ const router = createRouter({
       name: 'Masters',
       component: () => import('../views/masters/Index.vue')
     },
+    {
+      path: '/gallery',
+      name: 'Gallery',
+      component: () => import('../views/gallery/Index.vue')
+    },
   ]
 })
 

@@ -34,8 +34,8 @@
                         </router-link>
                     </li>
                     <li class="flex items-center pl-10">
-                        <router-link to="/" class="text-white lg:hover:text-gray-300 px-3 py-4 lg:py-2 flex items-center text-base uppercase font-bold">
-                            Фотографии
+                        <router-link to="/gallery" class="text-white lg:hover:text-gray-300 px-3 py-4 lg:py-2 flex items-center text-base uppercase font-bold">
+                            Галерея
                         </router-link>
                     </li>
                     <li class="flex items-center pl-10">
