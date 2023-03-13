@@ -26,6 +26,31 @@
                     </div>
                 </div>
             </div>
+
+            <section class="bg-gray-100">
+                <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
+                        <div class="lg:col-span-2 lg:py-12">
+                            <h1 class="text-neutral-900 mb-10 font-normal lg:text-5xl text-4xl">
+                                    О нас
+                                </h1>
+                            <p class="max-w-xl text-lg mb-5">
+                                Наш барбершоп - это не только место для стрижки и бритья, но и место для комфортного отдыха.
+                                У нас есть уютный интерьер, прохладительные напитки и дружелюбная атмосфера. Мы уверены, что
+                                после посещения нашего барбершопа вы будете чувствовать себя свежими и готовыми к новым
+                                вызовам. Мы – дружная семья с высоким стандартом качества и ценностями. За годы мы
+                                выработали свой особенный стиль и рады приобщать клиентов к прекрасному. У нас не просто
+                                парикмахерская, это сообщество.
+                            </p>
+                        </div>
+
+                        <div class="p-8 lg:col-span-3 lg:p-12">
+                            <img src="https://i.ibb.co/T1V2KvQ/7.jpg" alt="#" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </main>
     </div>
 </template>

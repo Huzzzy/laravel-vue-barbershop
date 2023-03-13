@@ -18,6 +18,11 @@ const router = createRouter({
       name: 'Reservation',
       component: () => import('../views/reservation/Index.vue')
     },
+    {
+      path: '/masters',
+      name: 'Masters',
+      component: () => import('../views/masters/Index.vue')
+    },
   ]
 })
 

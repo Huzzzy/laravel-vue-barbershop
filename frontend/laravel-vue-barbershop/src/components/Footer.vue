@@ -1,5 +1,9 @@
 <template>
     <footer class="relative bg-zinc-900 pt-8 pb-6 text-white">
+        <div class="absolute top-0 w-full h-full bg-center bg-cover"
+                    style='background-image: url("https://i.ibb.co/5cmbgG6/6.png");'>
+                    <span id="blackOverlay" class="w-full h-full absolute opacity-90 bg-black"></span>
+                </div>
         <div class="container mx-auto px-4">
             <div class="flex flex-wrap">
                 <div class="w-full lg:w-6/12 px-4 mb-10">
