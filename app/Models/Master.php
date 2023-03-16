@@ -11,4 +11,9 @@ class Master extends Model
 
     protected $table = 'masters';
     protected $guarded = false;
+
+    public function getImageUrlAttribute()
+    {
+        return url('storage/' . $this->photo);
+    }
 }

@@ -6,11 +6,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Товары</h1>
+                    <h1 class="m-0">Мастера</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item active">Товары</li>
+                        <li class="breadcrumb-item active">Мастера</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -27,7 +27,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route('product.create') }}" class="btn btn-primary">Добавить</a>
+                            <a href="{{ route('master.create') }}" class="btn btn-primary">Добавить</a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
@@ -35,24 +35,18 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Наименование</th>
+                                        <th>Имя</th>
                                         <th>Описание</th>
-                                        <th>Цена</th>
-                                        <th>Количество</th>
-                                        <th>Опубликовано</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($products as $product)
+                                    @foreach ($masters as $master)
                                         <tr>
-                                            <td>{{ $product->id }}</td>
+                                            <td>{{ $master->id }}</td>
                                             <td><a
-                                                    href="{{ route('product.show', $product->id) }}">{{ $product->title }}</a>
+                                                    href="{{ route('master.show', $master->id) }}">{{ $master->name }}</a>
                                             </td>
-                                            <td>{{ $product->description }}</td>
-                                            <td>{{ $product->price }}$</td>
-                                            <td>{{ $product->count }}</td>
-                                            <td>{{ $product->isPublishedTitle }}</td>
+                                            <td>{{ $master->description }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

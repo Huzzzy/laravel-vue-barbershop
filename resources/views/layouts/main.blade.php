@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Магазин</title>
+    <title>Барбершоп</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/select2/css/select2.min.css') }}">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet"
+        href="{{ asset('adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -24,7 +27,7 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <p class="animation__shake">Магазин</p>
+            <p class="animation__shake">Барбершоп</p>
         </div>
 
         <!-- Navbar -->
@@ -175,7 +178,7 @@
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <strong>Copyright &copy; 2014-{{ now()->year }} <a
-                    href="{{ route('main.index') }}">Магазин</a>.</strong>
+                    href="{{ route('main.index') }}">Барбершоп</a>.</strong>
             All rights reserved.
         </footer>
 
@@ -201,6 +204,10 @@
     <script src="{{ asset('adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
     <!-- Select2 -->
     <script src="{{ asset('adminlte/plugins/select2/js/select2.full.min.js') }}"></script>
+    <!-- moment -->
+    <script src="{{ asset('adminlte/plugins/moment/moment.min.js') }}"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="{{ asset('adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('adminlte/dist/js/adminlte.js') }}"></script>
 
@@ -209,6 +216,19 @@
             //Initialize Select2 Elements
             $('.tags').select2()
             $('.colors').select2()
+
+            //Date picker
+            $('#datetimepicker-create').datetimepicker({
+                allowMultidate: true,
+                multidateSeparator: ' ',
+                format: 'L'
+            });
+            $('#datetimepicker-edit').datetimepicker({
+                allowMultidate: true,
+                multidateSeparator: ' ',
+                format: 'L',
+            });
+
         })
     </script>
 </body>
