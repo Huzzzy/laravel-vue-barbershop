@@ -18,7 +18,7 @@ services:
       dockerfile: _docker/app/Dockerfile
     volumes:
       - ./:/var/www
-    user: 1000:1000
+    user: root:root
     container_name: laravel_vue_barbershop_app
     depends_on:
       - db
