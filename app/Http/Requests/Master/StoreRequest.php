@@ -28,4 +28,13 @@ class StoreRequest extends FormRequest
             'available_days' => 'required|string',
         ];
     }
+    protected function prepareForValidation()
+    {
+        $date = explode('/', $this->available_days);
+        list($date[0], $date[1], $date[2]) = [$date[2], $date[0], $date[1]];
+        $date = implode('-', $date);
+        $this->merge([
+            'date' => $date,
+        ]);
+    }
 }

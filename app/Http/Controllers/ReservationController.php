@@ -2,24 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reservation;
-use Illuminate\Http\Request;
-use App\Http\Requests\Reservation\StoreRequest;
-use App\Http\Requests\Reservation\UpdateRequest;
+use App\Models\User;
 use App\Models\Master;
 use App\Models\Service;
+use App\Models\Reservation;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Services\ReservationService;
+use App\Http\Requests\Reservation\StoreRequest;
+use App\Http\Requests\Reservation\UpdateRequest;
 
 class ReservationController extends Controller
 {
+    public $service;
+
+    public function __construct(ReservationService $service)
+    {
+        $this->service = $service;
+    }
+
     public function index()
     {
         $reservations = Reservation::all();
+
+        //Более читабельный вид дат
+        foreach ($reservations as $reservation ) {
+            $reservation->date = $this->service->ChangeDataFormat($reservation->date);
+        }
 
         return view('reservation.index', compact('reservations'));
     }
 
     public function show(Reservation $reservation)
     {
+        //Более читабельный вид дат
+        $reservation->date = $this->service->ChangeDataFormat($reservation->date);
+
         return view('reservation.show', compact('reservation'));
     }
 
@@ -35,7 +53,34 @@ class ReservationController extends Controller
     {
         $data = $request->validated();
 
-        Reservation::create($data);
+        //Ищем пользователя в базе для того, чтобы записывать количество его записей (Программы  лояльности и тд)
+        //
+        $user = User::where('phone', $data['phone'])->first();
+
+        if ($user !== null) {
+            $user->update(['visits' => ++$user->visits]);
+        } else {
+            $user = User::create([
+                'phone' => $data['phone'],
+                'name' => $data['name'],
+                'visits' => 1,
+            ]);
+        }
+        //
+
+        $reservation = Reservation::create([
+            'user_id' => $user->id,
+            'master_id' => $data['master_id'],
+            'date' => $data['date'],
+            'time' => $data['time'],
+            'status' => 1, // 1 - это актиная запись
+                           // 0 - это неактивная запись
+        ]);
+
+        $reservation->services()->attach($data['services']);
+
+        $user->update(['status' => 1]); // 1 - это есть актиная запись
+                                        // 0 - это нет неактивной записи
 
         return redirect()->route('reservation.index');
     }

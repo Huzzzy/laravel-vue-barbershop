@@ -46,7 +46,7 @@
                                             <td><a
                                                     href="{{ route('reservation.show', $reservation->id) }}">{{ $reservation->date }}</a>
                                             </td>
-                                            <td>{{ $reservation->time }}</td>
+                                            <td>{{ $reservation->time }}:00</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

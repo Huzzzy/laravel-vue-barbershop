@@ -53,26 +53,36 @@
                                     </tr>
                                     <tr>
                                         <th>Время</th>
-                                        <td>{{ $reservation->time }}</td>
+                                        <td>{{ $reservation->time }}:00</td>
                                     </tr>
                                     <tr>
                                         <th>Мастер</th>
-                                        <td>{{ $reservation->master->name }}</td>
+                                        <td>
+                                            <a href="{{ route('master.show', $reservation->master->id) }}">
+                                                {{ $reservation->master->name }}
+                                            </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Пользователь</th>
-                                        <td>{{ $reservation->user->name }}</td>
-                                        <td>{{ $reservation->user->phone }}</td>
+                                        <td>
+                                            {{-- {{ route('user.show', $reservation->user->id) }} --}}
+                                            <a href="#">
+                                                {{ $reservation->user->name }}
+                                            </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Услуги</th>
-                                        @foreach ($reservation->services as $service)
-                                            <td>{{ $service->title }}</td>
-                                        @endforeach
+                                        <td>
+                                            @foreach ($reservation->services as $service)
+                                                <div>{{ $service->title }}</div>
+                                            @endforeach
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Статус</th>
-                                        <td>{{ $reservation->status }}</td>
+                                        <td>{{ $reservation->statusTitle }}</td>
                                     </tr>
                                 </tbody>
                             </table>
