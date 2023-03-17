@@ -32,7 +32,7 @@ class PhotoController extends Controller
 
         $data['file_path'] = Storage::disk('public')->put('/images', $data['file_path']);
 
-        photo::create($data);
+        Photo::create($data);
 
         return redirect()->route('photo.index');
     }
