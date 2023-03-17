@@ -5,6 +5,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,4 +51,14 @@ Route::group(['prefix' => 'photos'], function () {
     Route::get('/{photo}', [PhotoController::class, 'show'])->name('photo.show');
     Route::patch('/{photo}', [PhotoController::class, 'update'])->name('photo.update');
     Route::delete('/{photo}', [PhotoController::class, 'delete'])->name('photo.delete');
+});
+
+Route::group(['prefix' => 'reservations'], function () {
+    Route::get('/', [ReservationController::class, 'index'])->name('reservation.index');
+    Route::get('/create', [ReservationController::class, 'create'])->name('reservation.create');
+    Route::post('/', [ReservationController::class, 'store'])->name('reservation.store');
+    Route::get('/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservation.edit');
+    Route::get('/{reservation}', [ReservationController::class, 'show'])->name('reservation.show');
+    Route::patch('/{reservation}', [ReservationController::class, 'update'])->name('reservation.update');
+    Route::delete('/{reservation}', [ReservationController::class, 'delete'])->name('reservation.delete');
 });
