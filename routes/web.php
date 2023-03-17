@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MasterController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +29,14 @@ Route::group(['prefix' => 'masters'], function () {
     Route::get('/{master}', [MasterController::class, 'show'])->name('master.show');
     Route::patch('/{master}', [MasterController::class, 'update'])->name('master.update');
     Route::delete('/{master}', [MasterController::class, 'delete'])->name('master.delete');
+});
+
+Route::group(['prefix' => 'services'], function () {
+    Route::get('/', [ServiceController::class, 'index'])->name('service.index');
+    Route::get('/create', [ServiceController::class, 'create'])->name('service.create');
+    Route::post('/', [ServiceController::class, 'store'])->name('service.store');
+    Route::get('/{service}/edit', [ServiceController::class, 'edit'])->name('service.edit');
+    Route::get('/{service}', [ServiceController::class, 'show'])->name('service.show');
+    Route::patch('/{service}', [ServiceController::class, 'update'])->name('service.update');
+    Route::delete('/{service}', [ServiceController::class, 'delete'])->name('service.delete');
 });

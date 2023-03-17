@@ -163,6 +163,14 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('service.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-concierge-bell"></i>
+                                <p>
+                                    Услуги
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
