@@ -47,7 +47,7 @@
                                         <td>{{ $master->id }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Наименование</th>
+                                        <th>Имя</th>
                                         <td>{{ $master->name }}</td>
                                     </tr>
                                     <tr>
