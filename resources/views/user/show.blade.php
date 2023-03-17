@@ -6,11 +6,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{ $master->name }}</h1>
+                    <h1 class="m-0">{{ $user->name }}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item active">{{ $master->name }}</li>
+                        <li class="breadcrumb-item active">{{ $user->name }}</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -26,45 +26,29 @@
 
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header d-flex p-3">
-                            <div class="mr-2">
-                                <a href="{{ route('master.edit', $master->id) }}" class="btn btn-primary">Редактировать</a>
-                            </div>
-                            <div class="mr-2">
-                                <form action="{{ route('master.delete', $master->id) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <input type="submit" value="Удалить" class="btn btn-danger">
-                                </form>
-                            </div>
-                        </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover text-nowrap">
                                 <tbody>
                                     <tr>
                                         <th>ID</th>
-                                        <td>{{ $master->id }}</td>
+                                        <td>{{ $user->id }}</td>
                                     </tr>
                                     <tr>
                                         <th>Имя</th>
-                                        <td>{{ $master->name }}</td>
+                                        <td>{{ $user->name }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Описание</th>
-                                        <td>{{ $master->description }}</td>
+                                        <th>Телефон</th>
+                                        <td>+{{ $user->phone }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Фото</th>
-                                        <td><img src="{{ $master->imageUrl }}" alt="{{ $master->name }}"></td>
+                                        <th>Сколько раз посещал</th>
+                                        <td>{{ $user->visits }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Рабочие дни</th>
-                                        <td>
-                                            @foreach ($master->available_days as $day)
-                                                <div>{{ $day }}</div>
-                                            @endforeach
-                                        </td>
+                                        <th>Статус</th>
+                                        <td>{{ $user->statusTitle }}</td>
                                     </tr>
                                 </tbody>
                             </table>

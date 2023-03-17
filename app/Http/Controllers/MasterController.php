@@ -29,7 +29,7 @@ class MasterController extends Controller
 
     public function show(Master $master)
     {
-        $master->available_days = json_decode($master->available_days);
+        $master->available_days = $this->service->ChangeDataFormat($master->available_days);
 
         return view('master.show', compact('master'));
     }

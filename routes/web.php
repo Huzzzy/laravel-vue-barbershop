@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\ServiceController;
@@ -62,3 +63,5 @@ Route::group(['prefix' => 'reservations'], function () {
     Route::patch('/{reservation}', [ReservationController::class, 'update'])->name('reservation.update');
     Route::delete('/{reservation}', [ReservationController::class, 'delete'])->name('reservation.delete');
 });
+
+Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show');
