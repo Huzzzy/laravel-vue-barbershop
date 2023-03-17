@@ -11,4 +11,9 @@ class Photo extends Model
 
     protected $table = 'photos';
     protected $guarded = false;
+
+    public function getImageUrlAttribute()
+    {
+        return url('storage/' . $this->file_path);
+    }
 }
