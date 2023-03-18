@@ -87,20 +87,35 @@ class ReservationController extends Controller
 
     public function edit(Reservation $reservation)
     {
-        return view('reservation.edit', compact('reservation'));
+        $masters = Master::all();
+        $services = Service::all();
+
+        $reservation->date = $this->service->ChangeDataFormatToTempusPlugin($reservation->date);
+
+        return view('reservation.edit', compact('reservation', 'masters', 'services'));
     }
 
     public function update(UpdateRequest $request, Reservation $reservation)
     {
         $data = $request->validated();
 
-        $reservation->update($data);
+        $reservation->update([
+            'master_id' => $data['master_id'],
+            'date' => $data['date'],
+            'time' => $data['time'],
+        ]);
+        $reservation->services()->sync($data['services']);
 
         return redirect()->route('reservation.show', compact('reservation'));
     }
 
     public function delete(Reservation $reservation)
     {
+        $user = User::where('id', $reservation->user_id)->first();
+
+        $user->update(['status' => 0]); // 1 - это есть актиная запись
+                                        // 0 - это нет неактивной записи
+
         $reservation->delete();
 
         return redirect()->route('reservation.index');

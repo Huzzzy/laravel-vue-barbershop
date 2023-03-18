@@ -60,55 +60,26 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="input-group date" id="datetimepicker-create" data-target-input="nearest">
+                        <div class="input-group date" id="datetimepicker-reservation-create" data-target-input="nearest">
                             <input name="date" type="text" class="form-control datetimepicker-input"
-                                data-target="#datetimepicker-create" />
-                            <div class="input-group-append" data-target="#datetimepicker-create"
+                                data-target="#datetimepicker-reservation-create" />
+                            <div class="input-group-append" data-target="#datetimepicker-reservation-create"
                                 data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
                         </div>
                     </div>
 
-                    <select name="time" class="form-control select2" style="width: 100%;">
-                        <option selected="selected" disabled>Выберите время</option>
-                        <option value="10">
-                            10
-                        </option>
-                        <option value="11">
-                            11
-                        </option>
-                        <option value="12">
-                            12
-                        </option>
-                        <option value="13">
-                            13
-                        </option>
-                        <option value="14">
-                            14
-                        </option>
-                        <option value="15">
-                            15
-                        </option>
-                        <option value="16">
-                            16
-                        </option>
-                        <option value="17">
-                            17
-                        </option>
-                        <option value="18">
-                            18
-                        </option>
-                        <option value="19">
-                            19
-                        </option>
-                        <option value="20">
-                            20
-                        </option>
-                        <option value="21">
-                            21
-                        </option>
-                    </select>
+                    <div class="form-group">
+                        <select name="time" class="form-control select2" style="width: 100%;">
+                            <option selected="selected" disabled>Выберите время</option>
+                            @for ($i = 10; $i < 22; $i++)
+                                <option value="{{ $i }}" {{ old('time') ? 'selected' : '' }}>
+                                    {{ $i }}:00
+                                </option>
+                            @endfor
+                        </select>
+                    </div>
 
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Добавить">

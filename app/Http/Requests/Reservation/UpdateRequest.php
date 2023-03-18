@@ -22,13 +22,21 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|integer|exists:users,id',
             'master_id' => 'required|integer|exists:masters,id',
             'date' => 'required',
             'time' => 'required',
             'services' => 'required|array',
             'services.*' => 'required|integer|exists:services,id',
-            'status' => 'nullable|boolean',
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $date = explode('/', $this->date);
+        list($date[0], $date[1], $date[2]) = [$date[2], $date[0], $date[1]];
+        $date = implode('-', $date);
+        $this->merge([
+            'date' => $date,
+        ]);
     }
 }

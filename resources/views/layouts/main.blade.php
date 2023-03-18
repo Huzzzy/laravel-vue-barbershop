@@ -140,7 +140,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="{{ route('main.index') }}" class="brand-link">
-                <span class="brand-text font-weight-light">Магазин</span>
+                <span class="brand-text font-weight-light">Барбершоп</span>
             </a>
 
             <!-- Sidebar -->
@@ -238,8 +238,7 @@
     <script>
         $(function() {
             //Initialize Select2 Elements
-            $('.tags').select2()
-            $('.colors').select2()
+            $('.services').select2()
 
             //Date picker
             $('#datetimepicker-create').datetimepicker({
@@ -253,6 +252,31 @@
                 format: 'L',
             });
 
+            // получаем дату и время
+            var today = new Date();
+            var date = (new Date()).toISOString().slice(0, 10);
+
+            date = date.split(/\s*-\s*/)
+
+            var nowDate = date[1] + "/" + date[2] + "/" + date[0]
+            var maxReservationDate = ++date[1] + "/" + date[2] + "/" + date[0]
+
+            $('#datetimepicker-reservation-create').datetimepicker({
+                format: 'L',
+                minDate: nowDate,
+                maxDate: maxReservationDate,
+            });
+
+            var reservation_date = document.querySelector('.reservation-date');
+            if (reservation_date !== null) {
+                reservation_date = document.querySelector('.reservation-date').getAttribute('data-attr')
+            }
+            $('#datetimepicker-reservation-edit').datetimepicker({
+                format: 'L',
+                minDate: nowDate,
+                maxDate: maxReservationDate,
+                defaultDate: reservation_date,
+            });
         })
     </script>
 </body>
