@@ -237,20 +237,11 @@
 
     <script>
         $(function() {
+
             //Initialize Select2 Elements
             $('.services').select2()
 
             //Date picker
-            $('#datetimepicker-create').datetimepicker({
-                allowMultidate: true,
-                multidateSeparator: ' ',
-                format: 'L'
-            });
-            $('#datetimepicker-edit').datetimepicker({
-                allowMultidate: true,
-                multidateSeparator: ' ',
-                format: 'L',
-            });
 
             // получаем дату и время
             var today = new Date();
@@ -261,11 +252,26 @@
             var nowDate = date[1] + "/" + date[2] + "/" + date[0]
             var maxReservationDate = ++date[1] + "/" + date[2] + "/" + date[0]
 
-            $('#datetimepicker-reservation-create').datetimepicker({
+
+            //Мастера
+            $('#datetimepicker-create').datetimepicker({
+                allowMultidate: true,
+                multidateSeparator: ' ',
                 format: 'L',
                 minDate: nowDate,
                 maxDate: maxReservationDate,
             });
+            $('#datetimepicker-edit').datetimepicker({
+                allowMultidate: true,
+                multidateSeparator: ' ',
+                format: 'L',
+                minDate: nowDate,
+                maxDate: maxReservationDate,
+            });
+
+
+            //Запись
+
 
             var reservation_date = document.querySelector('.reservation-date');
             if (reservation_date !== null) {

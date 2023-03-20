@@ -26,7 +26,7 @@ class ReservationController extends Controller
         $reservations = Reservation::all();
 
         //Более читабельный вид дат
-        foreach ($reservations as $reservation ) {
+        foreach ($reservations as $reservation) {
             $reservation->date = $this->service->ChangeDataFormat($reservation->date);
         }
 
@@ -74,13 +74,13 @@ class ReservationController extends Controller
             'date' => $data['date'],
             'time' => $data['time'],
             'status' => 1, // 1 - это актиная запись
-                           // 0 - это неактивная запись
+            // 0 - это неактивная запись
         ]);
 
         $reservation->services()->attach($data['services']);
 
         $user->update(['status' => 1]); // 1 - это есть актиная запись
-                                        // 0 - это нет неактивной записи
+        // 0 - это нет неактивной записи
 
         return redirect()->route('reservation.index');
     }
@@ -114,7 +114,7 @@ class ReservationController extends Controller
         $user = User::where('id', $reservation->user_id)->first();
 
         $user->update(['status' => 0]); // 1 - это есть актиная запись
-                                        // 0 - это нет неактивной записи
+        // 0 - это нет неактивной записи
 
         $reservation->delete();
 
