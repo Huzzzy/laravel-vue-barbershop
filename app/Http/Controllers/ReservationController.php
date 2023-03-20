@@ -52,7 +52,6 @@ class ReservationController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
-
         //Ищем пользователя в базе для того, чтобы записывать количество его записей (Программы  лояльности и тд)
         //
         $user = User::where('phone', $data['phone'])->first();

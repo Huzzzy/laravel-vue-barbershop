@@ -15,4 +15,12 @@ abstract class ReservationResource extends JsonResource
 
         return $data;
     }
+    public function ChangeDateFormatToDB($data)
+    {
+        $date = explode('/', $data);
+        list($date[0], $date[1], $date[2]) = [$date[2], $date[0], $date[1]];
+        $data = implode('-', $date);
+
+        return $data;
+    }
 }

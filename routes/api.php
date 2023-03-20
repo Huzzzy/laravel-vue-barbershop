@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/available-dates/{master}', [ReservationController::class, 'showAvailableDates']);
+Route::get('/available-time/{date}', [ReservationController::class, 'showAvailableTime'])->where('date', '.*');;
