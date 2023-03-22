@@ -23,8 +23,10 @@ class ReservationController extends Controller
 
     public function index()
     {
-        $reservations = Reservation::all();
-
+        $reservations = Reservation::all()->sortBy([
+            ['date', 'asc'],
+            ['time', 'asc']
+        ]);
         //Более читабельный вид дат
         foreach ($reservations as $reservation) {
             $reservation->date = $this->service->ChangeDataFormat($reservation->date);
