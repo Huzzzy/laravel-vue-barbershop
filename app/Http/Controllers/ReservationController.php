@@ -89,8 +89,6 @@ class ReservationController extends Controller
         $masters = Master::all();
         $services = Service::all();
 
-        $reservation->date = $this->service->ChangeDataFormatToTempusPlugin($reservation->date);
-
         return view('reservation.edit', compact('reservation', 'masters', 'services'));
     }
 
