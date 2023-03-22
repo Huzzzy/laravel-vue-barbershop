@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Master;
 use App\Models\Service;
@@ -23,6 +24,9 @@ class ReservationController extends Controller
 
     public function index()
     {
+        $yesterday = Carbon::today()->subDay()->toDateTimeString();
+        $lastReservations = Reservation::all()->where('created_at', '>', $yesterday);
+
         $reservations = Reservation::all()->sortBy([
             ['date', 'asc'],
             ['time', 'asc']
@@ -32,7 +36,20 @@ class ReservationController extends Controller
             $reservation->date = $this->service->ChangeDataFormat($reservation->date);
         }
 
-        return view('reservation.index', compact('reservations'));
+        return view('reservation.index', compact('reservations', 'lastReservations'));
+    }
+
+    public function last()
+    {
+        $yesterday = Carbon::today()->subDay()->toDateTimeString();
+        $reservations = Reservation::all()->where('created_at', '>', $yesterday);
+
+        //Более читабельный вид дат
+        foreach ($reservations as $reservation) {
+            $reservation->date = $this->service->ChangeDataFormat($reservation->date);
+        }
+
+        return view('reservation.last', compact('reservations'));
     }
 
     public function search()
@@ -49,7 +66,7 @@ class ReservationController extends Controller
             $reservation->date = $this->service->ChangeDataFormat($reservation->date);
         }
 
-        return view('reservation.index', compact('reservations'));
+        return view('reservation.search', compact('reservations'));
     }
 
     public function show(Reservation $reservation)
