@@ -35,6 +35,23 @@ class ReservationController extends Controller
         return view('reservation.index', compact('reservations'));
     }
 
+    public function search()
+    {
+        $data = request()->validate([
+            'query' => 'required|date_format:d-m-Y'
+        ]);
+        $data['query'] = $this->service->ChangeDataFormat($data['query']);
+
+        $reservations = Reservation::all()->where('date', $data['query'])->sortBy('time');
+
+        //Более читабельный вид дат
+        foreach ($reservations as $reservation) {
+            $reservation->date = $this->service->ChangeDataFormat($reservation->date);
+        }
+
+        return view('reservation.index', compact('reservations'));
+    }
+
     public function show(Reservation $reservation)
     {
         //Более читабельный вид дат

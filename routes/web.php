@@ -56,6 +56,7 @@ Route::group(['prefix' => 'photos'], function () {
 
 Route::group(['prefix' => 'reservations'], function () {
     Route::get('/', [ReservationController::class, 'index'])->name('reservation.index');
+    Route::post('/search', [ReservationController::class, 'search'])->name('reservation.search');
     Route::get('/create', [ReservationController::class, 'create'])->name('reservation.create');
     Route::post('/', [ReservationController::class, 'store'])->name('reservation.store');
     Route::get('/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservation.edit');

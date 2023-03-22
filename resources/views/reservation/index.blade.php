@@ -23,11 +23,25 @@
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <a href="{{ route('reservation.create') }}" class="btn btn-primary">Добавить</a>
+                        <div class="card-header d-flex justify-content-between">
+                            <div>
+                                <a href="{{ route('reservation.create') }}" class="btn btn-primary">Добавить</a>
+                            </div>
+
+                            <form action="{{ route('reservation.search') }}" method="post" enctype="multipart/form-data">
+                                @csrf
+
+                                <label for="query">Поиск по дате</label>
+                                <div class="form-group">
+                                    <input type="text" name="query" id="query" class="form-control"
+                                        placeholder="дд-мм-гггг" onchange="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-primary" value="Поиск">
+                                </div>
+                            </form>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
