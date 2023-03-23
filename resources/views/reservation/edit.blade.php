@@ -53,6 +53,10 @@
                                 </option>
                             @endforeach
                         </select>
+
+                        @error('services')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group" id="master">
@@ -68,8 +72,12 @@
                             @endforeach
                         </select>
 
-                        <input type="button" value="Подтвердить" onclick="getDates()"
-                            class="btn btn-primary mt-2" id="master_btn">
+                        @error('master_id')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+
+                        <input type="button" value="Подтвердить" onclick="getDates()" class="btn btn-primary mt-2"
+                            id="master_btn">
                     </div>
 
                     <div class="form-group" id="date">
@@ -84,6 +92,10 @@
                             </div>
                         </div>
 
+                        @error('date')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+
                         <input type="button" value="Подтвердить" onclick="getTime()" class="btn btn-primary mt-2 invisible"
                             id="date_btn">
                     </div>
@@ -91,10 +103,13 @@
                     <div class="form-group" id="time">
                         <label for="time">Выберите время</label>
 
-                        <select name="time" class="form-control select2" style="width: 100%;"
-                            id="select_time">
+                        <select name="time" class="form-control select2" style="width: 100%;" id="select_time">
                             <option selected="selected" disabled>Выберите время</option>
                         </select>
+
+                        @error('time')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div>

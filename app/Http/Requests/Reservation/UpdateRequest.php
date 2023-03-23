@@ -32,11 +32,23 @@ class UpdateRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        $date = explode('/', $this->date);
-        list($date[0], $date[1], $date[2]) = [$date[2], $date[0], $date[1]];
-        $date = implode('-', $date);
-        $this->merge([
-            'date' => $date,
-        ]);
+        if (isset($this->date)) {
+            $date = explode('/', $this->date);
+            list($date[0], $date[1], $date[2]) = [$date[2], $date[0], $date[1]];
+            $date = implode('-', $date);
+            $this->merge([
+                'date' => $date,
+            ]);
+        }
+    }
+
+    public function messages()
+    {
+        return [
+            'services.required' => 'Поле Услуги должно быть заполнено',
+            'master_id.required' => 'Поле Мастер должно быть заполнено',
+            'date.required' => 'Поле Дата должно быть заполнено',
+            'time.required' => 'Поле Время должно быть заполнено',
+        ];
     }
 }

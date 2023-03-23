@@ -38,12 +38,28 @@ class StoreRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        $date = explode('/', $this->date);
-        list($date[0], $date[1], $date[2]) = [$date[2], $date[0], $date[1]];
-        $date = implode('-', $date);
-        $this->merge([
-            'phone' => preg_replace('~\D+~', '', $this->phone),
-            'date' => $date,
-        ]);
+        if (isset($this->date, $this->phone)) {
+            $date = explode('/', $this->date);
+            list($date[0], $date[1], $date[2]) = [$date[2], $date[0], $date[1]];
+            $date = implode('-', $date);
+            $this->merge([
+                'phone' => preg_replace('~\D+~', '', $this->phone),
+                'date' => $date,
+            ]);
+        }
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Поле Имя должно быть заполнено',
+            'name.string' => 'Поле Имя должно быть строкой',
+            'phone.required' => 'Поле Телефон должно быть заполнено',
+            'phone.string' => 'Поле Телефон должно быть строкой',
+            'services.required' => 'Поле Услуги должно быть заполнено',
+            'master_id.required' => 'Поле Мастер должно быть заполнено',
+            'date.required' => 'Поле Дата должно быть заполнено',
+            'time.required' => 'Поле Время должно быть заполнено',
+        ];
     }
 }

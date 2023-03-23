@@ -31,9 +31,15 @@
 
                         <input type="text" value="{{ old('name') }}" name="name" id="user_name" class="form-control"
                             placeholder="Имя" onchange="getUserBtn()">
+                        @error('name')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
 
-                        <input type="phone" value="{{ old('phone') }}" name="phone" id="user_phone" class="form-control"
-                            placeholder="Телефон" onchange="getUserBtn()">
+                        <input type="phone" value="{{ old('phone') }}" name="phone" id="user_phone"
+                            class="form-control" placeholder="Телефон" onchange="getUserBtn()">
+                        @error('phone')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
 
 
                         <input type="button" value="Подтвердить" onclick="getServices()"
@@ -43,8 +49,8 @@
                     <div class="form-group position-absolute invisible" id="service">
                         <label for="service">Выберите услуги</label>
 
-                        <select name="services[]" class="services" multiple="multiple" data-placeholder="Выберите услуги" id="services"
-                            style="width: 100%;" onchange="getServiceBtn()">
+                        <select name="services[]" class="services" multiple="multiple" data-placeholder="Выберите услуги"
+                            id="services" style="width: 100%;" onchange="getServiceBtn()">
                             @foreach ($services as $service)
                                 <option value="{{ $service->id }}"
                                     {{ is_array(old('services')) && in_array($service->id, old('services')) ? 'selected' : '' }}>
@@ -69,6 +75,9 @@
                                 </option>
                             @endforeach
                         </select>
+                        @error('master_id')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
 
                         <input type="button" value="Подтвердить" onclick="getDates()"
                             class="btn btn-primary mt-2 invisible" id="master_btn">
@@ -86,6 +95,10 @@
                             </div>
                         </div>
 
+                        @error('date')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+
                         <input type="button" value="Подтвердить" onclick="getTime()" class="btn btn-primary mt-2 invisible"
                             id="date_btn">
                     </div>
@@ -97,6 +110,10 @@
                             id="select_time">
                             <option selected="selected" disabled>Выберите время</option>
                         </select>
+
+                        @error('time')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
 
                         <input type="button" value="Подтвердить" onclick="getCheck()"
                             class="btn btn-primary mt-2 invisible" id="time_btn">
@@ -112,7 +129,8 @@
                         </div>
 
                         <div class="form-group position-absolute invisible" id="reset">
-                            <input type="button" class="btn btn-primary mt-2" value="Сбросить" onclick="check(), reset()">
+                            <input type="button" class="btn btn-primary mt-2" value="Сбросить"
+                                onclick="check(), reset()">
                         </div>
                     </div>
                 </form>
