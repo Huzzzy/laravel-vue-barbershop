@@ -30,11 +30,26 @@ class StoreRequest extends FormRequest
     }
     protected function prepareForValidation()
     {
-        $date = explode('/', $this->available_days);
-        list($date[0], $date[1], $date[2]) = [$date[2], $date[0], $date[1]];
-        $date = implode('-', $date);
-        $this->merge([
-            'date' => $date,
-        ]);
+        if (isset($this->available_days)) {
+            $date = explode('/', $this->available_days);
+            list($date[0], $date[1], $date[2]) = [$date[2], $date[0], $date[1]];
+            $date = implode('-', $date);
+            $this->merge([
+                'date' => $date,
+            ]);
+        }
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Поле Имя должно быть заполнено',
+            'name.string' => 'Поле Имя должно быть строкой',
+            'description.required' => 'Поле Описание должно быть заполнено',
+            'description.string' => 'Поле Описание должно быть заполнено',
+            'photo.required' => 'Поле Фото должно быть заполнено',
+            'photo.file' => 'Поле Фото должно быть файлом',
+            'available_days.required' => 'Поле Рабочие дни должно быть заполнено',
+        ];
     }
 }

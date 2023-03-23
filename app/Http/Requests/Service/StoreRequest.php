@@ -26,4 +26,14 @@ class StoreRequest extends FormRequest
             'price' => 'required|integer',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Поле Наименование должно быть заполнено',
+            'title.string' => 'Поле Наименование должно быть строкой',
+            'price.required' => 'Поле Цена должно быть заполнено',
+            'price.integer' => 'Поле Цена должно быть числом',
+        ];
+    }
 }

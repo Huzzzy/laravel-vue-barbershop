@@ -28,13 +28,19 @@
                     @method('patch')
 
                     <div class="form-group">
-                        <input type="text" value="{{ old('title', $service->title) }}" name="title" class="form-control"
-                            placeholder="Наименование">
+                        <input type="text" value="{{ old('title', $service->title) }}" name="title"
+                            class="form-control" placeholder="Наименование">
+                        @error('title')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
-                        <input type="text" value="{{ old('price', $service->price) }}" name="price" class="form-control"
-                            placeholder="Цена">
+                        <input type="text" value="{{ old('price', $service->price) }}" name="price"
+                            class="form-control" placeholder="Цена">
+                        @error('price')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">

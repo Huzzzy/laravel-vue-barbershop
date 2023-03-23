@@ -26,4 +26,14 @@ class UpdateRequest extends FormRequest
             'file_path' => 'file',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Поле Наименование должно быть заполнено',
+            'title.string' => 'Поле Наименование должно быть строкой',
+            'file_path.required' => 'Поле Фото должно быть заполнено',
+            'file_path.file' => 'Поле Фото должно быть файлом',
+        ];
+    }
 }

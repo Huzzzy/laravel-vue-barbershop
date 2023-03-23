@@ -29,11 +29,17 @@
                     <div class="form-group">
                         <input type="text" value="{{ old('title') }}" name="title" class="form-control"
                             placeholder="Наименование">
+                        @error('title')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
                         <input type="text" value="{{ old('price') }}" name="price" class="form-control"
                             placeholder="Цена">
+                        @error('price')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">

@@ -29,6 +29,9 @@
                     <div class="form-group">
                         <input type="text" value="{{ old('title') }}" name="title" class="form-control"
                             placeholder="Наименование">
+                        @error('title')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
@@ -38,6 +41,9 @@
                                 <label class="custom-file-label">Выберите фото</label>
                             </div>
                         </div>
+                        @error('file_path')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">

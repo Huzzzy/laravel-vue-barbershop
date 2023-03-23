@@ -30,9 +30,15 @@
                     <div class="form-group">
                         <input type="text" value="{{ old('name', $master->name) }}" name="name" class="form-control"
                             placeholder="Имя">
+                            @error('name')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <textarea name="description" cols="30" rows="10" class="form-control" placeholder="Описание">{{ old('description', $master->description) }}</textarea>
+                        @error('description')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <h4>Текущее фото:</h4>
@@ -43,6 +49,9 @@
                                 <label class="custom-file-label">Выберите фото</label>
                             </div>
                         </div>
+                        @error('photo')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
@@ -51,12 +60,15 @@
                             <div>{{ $day }}</div>
                         @endforeach
                         <div class="input-group date" id="datetimepicker-edit" data-target-input="nearest">
-                            <input name="available_days" type="text" class="form-control datetimepicker-input"
+                            <input name="available_days" type="text" placeholder="Рабочие дни" class="form-control datetimepicker-input"
                                 data-target="#datetimepicker-edit" />
                             <div class="input-group-append" data-target="#datetimepicker-edit" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
                         </div>
+                        @error('available_days')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
