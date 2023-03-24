@@ -4,26 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class User extends Model
+class User extends Authenticatable
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
 
-    const STATUS_TRUE = 1;
-    const STATUS_FALSE = 0;
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
 
-    static function getStatus()
-    {
-        return [
-            self::STATUS_TRUE => 'Есть запись',
-            self::STATUS_FALSE => 'Нету записей',
-        ];
-    }
-    public function getStatusTitleAttribute()
-    {
-        return self::getStatus()[$this->status];
-    }
+    protected $hidden = [
+        'password',
+    ];
 
     protected $table = 'users';
-    protected $guarded = false;
 }

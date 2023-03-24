@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('master_id')->references('id')->on('masters');
+            $table->foreignId('client_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->foreignId('master_id')->references('id')->on('masters')->onDelete('cascade');
             $table->date('date');
             $table->integer('time');
             $table->boolean('status');
