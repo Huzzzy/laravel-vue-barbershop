@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use App\Models\User;
+use App\Models\Client;
 use App\Models\Master;
 use App\Models\Service;
 use App\Models\Reservation;
@@ -90,12 +90,12 @@ class ReservationController extends Controller
         $data = $request->validated();
         //Ищем пользователя в базе для того, чтобы записывать количество его записей (Программы  лояльности и тд)
         //
-        $user = User::where('phone', $data['phone'])->first();
+        $client = Client::where('phone', $data['phone'])->first();
 
-        if ($user !== null) {
-            $user->update(['visits' => ++$user->visits]);
+        if ($client !== null) {
+            $client->update(['visits' => ++$client->visits]);
         } else {
-            $user = User::create([
+            $client = Client::create([
                 'phone' => $data['phone'],
                 'name' => $data['name'],
                 'visits' => 1,
@@ -104,7 +104,7 @@ class ReservationController extends Controller
         //
 
         $reservation = Reservation::create([
-            'user_id' => $user->id,
+            'client_id' => $client->id,
             'master_id' => $data['master_id'],
             'date' => $data['date'],
             'time' => $data['time'],
@@ -114,7 +114,7 @@ class ReservationController extends Controller
 
         $reservation->services()->attach($data['services']);
 
-        $user->update(['status' => 1]); // 1 - это есть актиная запись
+        $client->update(['status' => 1]); // 1 - это есть актиная запись
         // 0 - это нет неактивной записи
 
         return redirect()->route('reservation.index');
@@ -144,9 +144,9 @@ class ReservationController extends Controller
 
     public function delete(Reservation $reservation)
     {
-        $user = User::where('id', $reservation->user_id)->first();
+        $client = Client::where('id', $reservation->client_id)->first();
 
-        $user->update(['status' => 0]); // 1 - это есть актиная запись
+        $client->update(['status' => 0]); // 1 - это есть актиная запись
         // 0 - это нет неактивной записи
 
         $reservation->delete();

@@ -15,9 +15,9 @@ use App\Http\Controllers\API\ReservationController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::get('/available-dates/{master}', [ReservationController::class, 'showAvailableDates']);
 Route::get('/available-time/{date}', [ReservationController::class, 'showAvailableTime'])->where('date', '.*');;

@@ -39,6 +39,14 @@
                             class="fas fa-bars"></i></a>
                 </li>
             </ul>
+            <ul class="navbar-nav ml-auto mb-3">
+                <li class="nav-link">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <input type="submit" class="btn btn-outline-dark" value="Выйти">
+                    </form>
+                </li>
+            </ul>
         </nav>
         <!-- /.navbar -->
 
