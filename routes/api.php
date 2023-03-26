@@ -22,7 +22,4 @@ use App\Http\Controllers\API\ReservationController;
 Route::get('/available-dates/{master}', [ReservationController::class, 'showAvailableDates']);
 Route::get('/available-time/{date}', [ReservationController::class, 'showAvailableTime'])->where('date', '.*');
 
-Route::post('/reservation', function ()
-{
-   dd(request()->request);
-});
+Route::post('/reservation', [ReservationController::class, 'store']);

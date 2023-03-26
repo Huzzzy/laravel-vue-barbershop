@@ -34,8 +34,8 @@
                         </div>
 
                         <div class="rounded-none bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
-                            <form action="http://localhost:8876/api/reservation" method="post" @submit.prevent="getData" enctype="multipart/form-data"
-                                class="space-y-4">
+                            <form action="http://localhost:8876/api/reservation" method="post" @submit.prevent="getData"
+                                enctype="multipart/form-data" class="space-y-4">
                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                     <div>
                                         <label class="w-full lg:text-xl text-lg mb-2" for="name">Введите имя</label>
@@ -46,7 +46,8 @@
                                     <div>
                                         <label class="w-full lg:text-xl text-lg mb-2" for="phone">Введите телефон</label>
                                         <input class="w-full rounded-none border-gray-200 p-3 text-sm"
-                                            placeholder="+375123456789" type="tel" id="phone" name="phone" v-model="reservation.phone" />
+                                            placeholder="+375123456789" type="tel" id="phone" name="phone"
+                                            v-model="reservation.phone" />
                                     </div>
                                 </div>
 
@@ -59,7 +60,8 @@
 
                                     <div>
                                         <img src="https://i.ibb.co/WsG6zRr/5.png" alt="Влад" border="0" class="mb-2" />
-                                        <input class="peer sr-only" id="option1" type="radio" value="Влад" tabindex="-1" name="master_id" v-model="reservation.master_id" />
+                                        <input class="peer sr-only" id="option1" type="radio" value="Влад" tabindex="-1"
+                                            name="master_id" v-model="reservation.master_id" />
 
                                         <label for="option1"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -70,7 +72,8 @@
 
                                     <div>
                                         <img src="https://i.ibb.co/GJYnV5j/3.png" alt="Никита" border="0" class="mb-2" />
-                                        <input class="peer sr-only" id="option2" type="radio" value="Никита" tabindex="-1" name="master_id" v-model="reservation.master_id" />
+                                        <input class="peer sr-only" id="option2" type="radio" value="Никита" tabindex="-1"
+                                            name="master_id" v-model="reservation.master_id" />
 
                                         <label for="option2"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -81,7 +84,8 @@
 
                                     <div>
                                         <img src="https://i.ibb.co/W2gWssW/4.png" alt="Рома" border="0" class="mb-2" />
-                                        <input class="peer sr-only" id="option3" type="radio" value="Рома" tabindex="-1" name="master_id" v-model="reservation.master_id" />
+                                        <input class="peer sr-only" id="option3" type="radio" value="Рома" tabindex="-1"
+                                            name="master_id" v-model="reservation.master_id" />
 
                                         <label for="option3"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -92,7 +96,8 @@
 
                                     <div>
                                         <img src="https://i.ibb.co/hY3pT8q/2.png" alt="Глеб" border="0" class="mb-2" />
-                                        <input class="peer sr-only" id="option4" type="radio" value="Глеб" tabindex="-1" name="master_id" v-model="reservation.master_id" />
+                                        <input class="peer sr-only" id="option4" type="radio" value="Глеб" tabindex="-1"
+                                            name="master_id" v-model="reservation.master_id" />
 
                                         <label for="option4"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -103,7 +108,8 @@
 
                                     <div>
                                         <img src="https://i.ibb.co/37BkpJy/1.png" alt="Максим" border="0" class="mb-2" />
-                                        <input class="peer sr-only" id="option5" type="radio" value="Максим" tabindex="-1" name="master_id" v-model="reservation.master_id" />
+                                        <input class="peer sr-only" id="option5" type="radio" value="Максим" tabindex="-1"
+                                            name="master_id" v-model="reservation.master_id" />
 
                                         <label for="option5"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -122,23 +128,28 @@
                                     <div class="form-control">
                                         <label class="label cursor-pointer">
                                             <span class="label-text">Услуга</span>
-                                            <input type="checkbox" name="services[]" v-model="reservation.services" value="1" class="checkbox" />
+                                            <input type="checkbox" name="services[]" v-model="reservation.services"
+                                                value="1" class="checkbox" />
                                         </label>
                                         <label class="label cursor-pointer">
                                             <span class="label-text">Услуга</span>
-                                            <input type="checkbox" name="services[]" v-model="reservation.services" value="2" class="checkbox" />
+                                            <input type="checkbox" name="services[]" v-model="reservation.services"
+                                                value="2" class="checkbox" />
                                         </label>
                                         <label class="label cursor-pointer">
                                             <span class="label-text">Услуга</span>
-                                            <input type="checkbox" name="services[]" v-model="reservation.services" value="3" class="checkbox" />
+                                            <input type="checkbox" name="services[]" v-model="reservation.services"
+                                                value="3" class="checkbox" />
                                         </label>
                                         <label class="label cursor-pointer">
                                             <span class="label-text">Услуга</span>
-                                            <input type="checkbox" name="services[]" v-model="reservation.services" value="4" class="checkbox" />
+                                            <input type="checkbox" name="services[]" v-model="reservation.services"
+                                                value="4" class="checkbox" />
                                         </label>
                                         <label class="label cursor-pointer">
                                             <span class="label-text">Услуга</span>
-                                            <input type="checkbox" name="services[]" v-model="reservation.services" value="5" class="checkbox" />
+                                            <input type="checkbox" name="services[]" v-model="reservation.services"
+                                                value="5" class="checkbox" />
                                         </label>
                                     </div>
                                 </div>
@@ -160,7 +171,8 @@
                                 <div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
 
                                     <div>
-                                        <input class="peer sr-only" id="option10" type="radio" value="10" tabindex="-1" name="time" v-model="reservation.time" />
+                                        <input class="peer sr-only" id="option10" type="radio" value="10" tabindex="-1"
+                                            name="time" v-model="reservation.time" />
 
                                         <label for="option10"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -170,7 +182,8 @@
                                     </div>
 
                                     <div>
-                                        <input class="peer sr-only" id="option20" type="radio" value="11" tabindex="-1" name="time" v-model="reservation.time" />
+                                        <input class="peer sr-only" id="option20" type="radio" value="11" tabindex="-1"
+                                            name="time" v-model="reservation.time" />
 
                                         <label for="option20"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -180,7 +193,8 @@
                                     </div>
 
                                     <div>
-                                        <input class="peer sr-only" id="option30" type="radio" value="" tabindex="-1" name="time" v-model="reservation.time" />
+                                        <input class="peer sr-only" id="option30" type="radio" value="" tabindex="-1"
+                                            name="time" v-model="reservation.time" />
 
                                         <label for="option30"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -190,7 +204,8 @@
                                     </div>
 
                                     <div>
-                                        <input class="peer sr-only" id="option40" type="radio" value="" tabindex="-1" name="time" v-model="reservation.time" />
+                                        <input class="peer sr-only" id="option40" type="radio" value="" tabindex="-1"
+                                            name="time" v-model="reservation.time" />
 
                                         <label for="option40"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -200,7 +215,8 @@
                                     </div>
 
                                     <div>
-                                        <input class="peer sr-only" id="option50" type="radio" value="" tabindex="-1" name="time" v-model="reservation.time" />
+                                        <input class="peer sr-only" id="option50" type="radio" value="" tabindex="-1"
+                                            name="time" v-model="reservation.time" />
 
                                         <label for="option50"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -210,7 +226,8 @@
                                     </div>
 
                                     <div>
-                                        <input class="peer sr-only" id="option60" type="radio" value="" tabindex="-1" name="time" v-model="reservation.time" />
+                                        <input class="peer sr-only" id="option60" type="radio" value="" tabindex="-1"
+                                            name="time" v-model="reservation.time" />
 
                                         <label for="option60"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -219,7 +236,8 @@
                                         </label>
                                     </div>
                                     <div>
-                                        <input class="peer sr-only" id="option70" type="radio" value="" tabindex="-1" name="time" v-model="reservation.time" />
+                                        <input class="peer sr-only" id="option70" type="radio" value="" tabindex="-1"
+                                            name="time" v-model="reservation.time" />
 
                                         <label for="option70"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -228,7 +246,8 @@
                                         </label>
                                     </div>
                                     <div>
-                                        <input class="peer sr-only" id="option80" type="radio" value="" tabindex="-1" name="time" v-model="reservation.time" />
+                                        <input class="peer sr-only" id="option80" type="radio" value="" tabindex="-1"
+                                            name="time" v-model="reservation.time" />
 
                                         <label for="option80"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -237,7 +256,8 @@
                                         </label>
                                     </div>
                                     <div>
-                                        <input class="peer sr-only" id="option90" type="radio" value="" tabindex="-1" name="time" v-model="reservation.time" />
+                                        <input class="peer sr-only" id="option90" type="radio" value="" tabindex="-1"
+                                            name="time" v-model="reservation.time" />
 
                                         <label for="option90"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -246,7 +266,8 @@
                                         </label>
                                     </div>
                                     <div>
-                                        <input class="peer sr-only" id="option100" type="radio" value="" tabindex="-1" name="time" v-model="reservation.time" />
+                                        <input class="peer sr-only" id="option100" type="radio" value="" tabindex="-1"
+                                            name="time" v-model="reservation.time" />
 
                                         <label for="option100"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -255,7 +276,8 @@
                                         </label>
                                     </div>
                                     <div>
-                                        <input class="peer sr-only" id="option110" type="radio" value="" tabindex="-1" name="time" v-model="reservation.time" />
+                                        <input class="peer sr-only" id="option110" type="radio" value="" tabindex="-1"
+                                            name="time" v-model="reservation.time" />
 
                                         <label for="option110"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -264,7 +286,8 @@
                                         </label>
                                     </div>
                                     <div>
-                                        <input class="peer sr-only" id="option120" type="radio" value="" tabindex="-1" name="time" v-model="reservation.time" />
+                                        <input class="peer sr-only" id="option120" type="radio" value="" tabindex="-1"
+                                            name="time" v-model="reservation.time" />
 
                                         <label for="option120"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -297,19 +320,28 @@ export default {
     name: "Reservation",
     data() {
         return {
-            reservation:{
-                name:null,
-                phone:null,
-                master_id:null,
-                services:[],
-                date:null,
-                time:null,
+            reservation: {
+                name: null,
+                phone: null,
+                master_id: null,
+                services: [],
+                date: null,
+                time: null,
             }
         }
     },
     methods: {
-        getData(){
+        getData() {
             console.log(this.reservation);
+            this.axios.post('http://localhost:8876/api/reservation', {
+                data: this.reservation
+            })
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
 
         },
         setDate(data) {
