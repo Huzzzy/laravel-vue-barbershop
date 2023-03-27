@@ -7,6 +7,7 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------

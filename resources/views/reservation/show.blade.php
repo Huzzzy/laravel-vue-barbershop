@@ -66,8 +66,8 @@
                                     <tr>
                                         <th>Пользователь</th>
                                         <td>
-                                            <a href="{{ route('user.show', $reservation->user->id) }}">
-                                                {{ $reservation->user->name }}
+                                            <a href="{{ route('client.show', $reservation->client->id) }}">
+                                                {{ $reservation->client->name }}
                                             </a>
                                         </td>
                                     </tr>
