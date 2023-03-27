@@ -36,7 +36,6 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Имя</th>
-                                        <th>Описание</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,7 +45,6 @@
                                             <td><a
                                                     href="{{ route('master.show', $master->id) }}">{{ $master->name }}</a>
                                             </td>
-                                            <td>{{ $master->description }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

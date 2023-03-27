@@ -17,13 +17,11 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header d-flex p-3">
@@ -52,7 +50,7 @@
                                     </tr>
                                     <tr>
                                         <th>Описание</th>
-                                        <td>{{ $master->description }}</td>
+                                        <td>{!! $master->description !!}</td>
                                     </tr>
                                     <tr>
                                         <th>Фото</th>
