@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ReservationController;
+use App\Http\Controllers\API\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,5 @@ Route::get('/available-dates/{master}', [ReservationController::class, 'showAvai
 Route::get('/available-time/{date}', [ReservationController::class, 'showAvailableTime'])->where('date', '.*');
 
 Route::post('/reservation', [ReservationController::class, 'store']);
+
+Route::get('/services',[ServiceController::class, 'index']);
