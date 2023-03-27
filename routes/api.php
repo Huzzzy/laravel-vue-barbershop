@@ -2,8 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\ReservationController;
+use App\Http\Controllers\API\MasterController;
 use App\Http\Controllers\API\ServiceController;
+use App\Http\Controllers\API\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,4 @@ Route::get('/available-time/{date}', [ReservationController::class, 'showAvailab
 Route::post('/reservation', [ReservationController::class, 'store']);
 
 Route::get('/services',[ServiceController::class, 'index']);
+Route::get('/masters',[MasterController::class, 'index']);
