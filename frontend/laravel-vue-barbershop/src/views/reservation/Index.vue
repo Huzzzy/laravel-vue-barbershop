@@ -58,63 +58,16 @@
 
                                 <div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
 
-                                    <div>
-                                        <img src="https://i.ibb.co/WsG6zRr/5.png" alt="Влад" border="0" class="mb-2" />
-                                        <input class="peer sr-only" id="option1" type="radio" value="Влад" tabindex="-1"
-                                            name="master_id" v-model="reservation.master_id" />
+                                    <div v-for="master in availableMasters">
+                                        <img :src="master.photo" :alt="master.name" border="0" class="mb-2" />
+                                        <input class="peer sr-only" :id="`option${master.id}`" type="radio"
+                                            :value="master.name" tabindex="-1" name="master_id"
+                                            v-model="reservation.master_id" />
 
-                                        <label for="option1"
+                                        <label @click="getDate(master.id)" :for="`option${master.id}`"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
                                             tabindex="0">
-                                            <span class="text-sm font-medium"> Влад </span>
-                                        </label>
-                                    </div>
-
-                                    <div>
-                                        <img src="https://i.ibb.co/GJYnV5j/3.png" alt="Никита" border="0" class="mb-2" />
-                                        <input class="peer sr-only" id="option2" type="radio" value="Никита" tabindex="-1"
-                                            name="master_id" v-model="reservation.master_id" />
-
-                                        <label for="option2"
-                                            class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
-                                            tabindex="0">
-                                            <span class="text-sm font-medium"> Никита </span>
-                                        </label>
-                                    </div>
-
-                                    <div>
-                                        <img src="https://i.ibb.co/W2gWssW/4.png" alt="Рома" border="0" class="mb-2" />
-                                        <input class="peer sr-only" id="option3" type="radio" value="Рома" tabindex="-1"
-                                            name="master_id" v-model="reservation.master_id" />
-
-                                        <label for="option3"
-                                            class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
-                                            tabindex="0">
-                                            <span class="text-sm font-medium"> Рома </span>
-                                        </label>
-                                    </div>
-
-                                    <div>
-                                        <img src="https://i.ibb.co/hY3pT8q/2.png" alt="Глеб" border="0" class="mb-2" />
-                                        <input class="peer sr-only" id="option4" type="radio" value="Глеб" tabindex="-1"
-                                            name="master_id" v-model="reservation.master_id" />
-
-                                        <label for="option4"
-                                            class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
-                                            tabindex="0">
-                                            <span class="text-sm font-medium"> Глеб </span>
-                                        </label>
-                                    </div>
-
-                                    <div>
-                                        <img src="https://i.ibb.co/37BkpJy/1.png" alt="Максим" border="0" class="mb-2" />
-                                        <input class="peer sr-only" id="option5" type="radio" value="Максим" tabindex="-1"
-                                            name="master_id" v-model="reservation.master_id" />
-
-                                        <label for="option5"
-                                            class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
-                                            tabindex="0">
-                                            <span class="text-sm font-medium"> Максим </span>
+                                            <span class="text-sm font-medium"> {{ master.name }} </span>
                                         </label>
                                     </div>
                                 </div>
@@ -126,30 +79,10 @@
 
                                 <div>
                                     <div class="form-control">
-                                        <label class="label cursor-pointer">
-                                            <span class="label-text">Услуга</span>
+                                        <label v-for="service in availableServices" class="label cursor-pointer">
+                                            <span class="label-text">{{ service.title }}</span>
                                             <input type="checkbox" name="services[]" v-model="reservation.services"
-                                                value="1" class="checkbox" />
-                                        </label>
-                                        <label class="label cursor-pointer">
-                                            <span class="label-text">Услуга</span>
-                                            <input type="checkbox" name="services[]" v-model="reservation.services"
-                                                value="2" class="checkbox" />
-                                        </label>
-                                        <label class="label cursor-pointer">
-                                            <span class="label-text">Услуга</span>
-                                            <input type="checkbox" name="services[]" v-model="reservation.services"
-                                                value="3" class="checkbox" />
-                                        </label>
-                                        <label class="label cursor-pointer">
-                                            <span class="label-text">Услуга</span>
-                                            <input type="checkbox" name="services[]" v-model="reservation.services"
-                                                value="4" class="checkbox" />
-                                        </label>
-                                        <label class="label cursor-pointer">
-                                            <span class="label-text">Услуга</span>
-                                            <input type="checkbox" name="services[]" v-model="reservation.services"
-                                                value="5" class="checkbox" />
+                                                :value="service.id" class="checkbox" />
                                         </label>
                                     </div>
                                 </div>
@@ -160,7 +93,7 @@
                                 </h1>
 
                                 <div>
-                                    <datepicker-component @date="setDate"></datepicker-component>
+                                    <datepicker-component :allowedDates="availableDays" @date="setDate"></datepicker-component>
                                 </div>
 
                                 <hr class="lg:my-6 border-gray-400" />
@@ -327,8 +260,15 @@ export default {
                 services: [],
                 date: null,
                 time: null,
-            }
+            },
+            availableServices: [],
+            availableMasters: [],
+            availableDays: []
         }
+    },
+    mounted() {
+        this.getMasters(),
+            this.getServices()
     },
     methods: {
         getData() {
@@ -346,6 +286,24 @@ export default {
         },
         setDate(data) {
             this.reservation.date = data.date;
+        },
+        getDate(id) {
+            this.axios.get(`http://localhost:8876/api/available-dates/${id}`)
+                .then(result => {
+                    this.availableDays = result.data.data
+                })
+        },
+        getMasters() {
+            this.axios.get('http://localhost:8876/api/masters')
+                .then(result => {
+                    this.availableMasters = result.data.data
+                })
+        },
+        getServices() {
+            this.axios.get('http://localhost:8876/api/services')
+                .then(result => {
+                    this.availableServices = result.data.data
+                })
         }
     },
     components: {

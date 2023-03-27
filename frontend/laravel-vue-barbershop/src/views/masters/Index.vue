@@ -41,7 +41,6 @@ export default {
         getMasters() {
             this.axios.get('http://localhost:8876/api/masters')
                 .then(result => {
-                    console.log(result.data.data);
                     this.masters = result.data.data
                 })
         }
