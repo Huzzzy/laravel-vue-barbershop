@@ -18,16 +18,17 @@ export default {
 
     computed: {
         availableDays() {
+            var dates = []
             if (typeof (this.allowedDates.enabledDates) != "undefined" && this.allowedDates.enabledDates !== null) {
-
-                var dates = []
 
                 this.allowedDates.enabledDates.forEach(element => {
                     element = element.split('/');
                     dates.push(new Date(element[2], --element[0], element[1]))
                 });
-                return dates;
+            } else {
+                dates.push(new Date())
             }
+            return dates
         }
     },
 
