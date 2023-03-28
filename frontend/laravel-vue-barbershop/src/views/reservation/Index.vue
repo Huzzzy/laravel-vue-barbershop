@@ -181,6 +181,8 @@ export default {
                 })
         },
         getDate(id) {
+            this.reservation.time = null
+            this.reservation.date = null
             this.availableTime = []
 
             this.axios.get(`http://localhost:8876/api/available-dates/${id}`)
