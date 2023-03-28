@@ -36,6 +36,17 @@ class ReservationController extends Controller
 
         $data = $request->input('data');
 
+        if (
+            gettype($data['date']) !== 'string' &&
+            gettype($data['name']) !== 'string' &&
+            gettype($data['phone']) !== 'string' &&
+            gettype($data['master_id']) !== 'integer' &&
+            gettype($data['time']) !== 'integer' &&
+            gettype($data['services']) !== 'array'
+        ) {
+            return;
+        }
+
         $this->service->store($data);
 
         return;

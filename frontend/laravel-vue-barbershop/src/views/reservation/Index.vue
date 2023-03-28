@@ -124,7 +124,7 @@
                                 </div>
                                 <div>
                                     <p class="text-center">
-                                        Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь
+                                        Подтверждая, вы даете согласие на обработку персональных данных и соглашаетесь
                                         c политикой конфиденциальности
                                     </p>
                                 </div>
@@ -188,7 +188,7 @@ export default {
             if (this.reservation.master_id === null) {
                 this.errors.push('Выберите мастера.');
             }
-            if (this.reservation.services === null) {
+            if (this.reservation.services.length === 0) {
                 this.errors.push('Выберите услуги.');
             }
             if (this.reservation.date === null) {
@@ -197,15 +197,33 @@ export default {
             if (this.reservation.time === null) {
                 this.errors.push('Выберите время.');
             }
+            if (
+                typeof this.reservation.name !== 'string' &&
+                typeof this.reservation.phone !== 'string' &&
+                typeof this.reservation.date !== 'string' &&
+                typeof this.reservation.master_id !== 'number' &&
+                typeof this.reservation.time !== 'number' &&
+                typeof this.reservation.services !== 'object'
+            ) {
+                this.errors.push('С вашим запросом что-то не так...');
+            }
+
+            this.reservation.services.forEach(element => {
+                if (typeof element !== 'number') {
+                    this.errors.push('С вашим запросом что-то не так...');
+                }
+            });
 
             if (this.errors.length === 0) {
+
                 this.reservation.phone = this.reservation.phone.replace(/[^\d]/g, '')
-                console.log(this.reservation);
 
                 this.axios.post('http://localhost:8876/api/reservation', {
                     data: this.reservation
                 })
 
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
                 this.$router.push({ name: 'Main' });
             }
 
