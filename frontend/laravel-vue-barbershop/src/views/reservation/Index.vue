@@ -123,6 +123,12 @@
                                     </button>
                                 </div>
                                 <div>
+                                    <p class="text-center">
+                                        Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь
+                                        c политикой конфиденциальности
+                                    </p>
+                                </div>
+                                <div>
                                     <p v-if="errors.length">
                                         <b>Пожалуйста исправьте указанные ошибки:</b>
                                     <ul>
@@ -170,26 +176,26 @@ export default {
             this.errors = [];
 
             if (!this.reservation.name) {
-                this.errors.push('Требуется указать имя.');
+                this.errors.push('Укажите имя.');
             }
             if (!this.reservation.phone) {
-                this.errors.push('Требуется указать телефон.');
+                this.errors.push('Укажите телефон.');
             }
             if (this.reservation.phone &&
                 this.reservation.phone.replace(/[^\d]/g, '').length != 12) {
                 this.errors.push('Номер телефона должен состоять из 12 цифр.');
             }
             if (this.reservation.master_id === null) {
-                this.errors.push('Требуется выбрать мастера.');
+                this.errors.push('Выберите мастера.');
             }
             if (this.reservation.services === null) {
-                this.errors.push('Требуется выбрать услуги.');
+                this.errors.push('Выберите услуги.');
             }
             if (this.reservation.date === null) {
-                this.errors.push('Требуется выбрать дату.');
+                this.errors.push('Выберите дату.');
             }
             if (this.reservation.time === null) {
-                this.errors.push('Требуется выбрать время.');
+                this.errors.push('Выберите время.');
             }
 
             if (this.errors.length === 0) {
