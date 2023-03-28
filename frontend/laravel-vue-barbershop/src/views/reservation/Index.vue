@@ -61,7 +61,7 @@
                                     <div v-for="master in availableMasters">
                                         <img :src="master.photo" :alt="master.name" border="0" class="mb-2" />
                                         <input class="peer sr-only" :id="`option${master.id}`" type="radio"
-                                            :value="master.name" tabindex="-1" name="master_id"
+                                            :value="master.id" tabindex="-1" name="master_id"
                                             v-model="reservation.master_id" />
 
                                         <label @click="getDate(master.id)" :for="`option${master.id}`"
@@ -123,6 +123,14 @@
                                         Подтведить
                                     </button>
                                 </div>
+                                <div>
+                                    <p v-if="errors.length">
+                                        <b>Пожалуйста исправьте указанные ошибки:</b>
+                                    <ul>
+                                        <li v-for="error in errors">{{ error }}</li>
+                                    </ul>
+                                    </p>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -151,6 +159,7 @@ export default {
             availableMasters: [],
             availableDays: [],
             availableTime: [],
+            errors: [],
         }
     },
     mounted() {
@@ -158,17 +167,49 @@ export default {
             this.getServices()
     },
     methods: {
-        getData() {
+        getData(e) {
             console.log(this.reservation);
-            this.axios.post('http://localhost:8876/api/reservation', {
-                data: this.reservation
-            })
-                .then(function (response) {
-                    console.log(response);
+
+            this.errors = [];
+
+            if (!this.reservation.name) {
+                this.errors.push('Требуется указать имя.');
+            }
+            if (!this.reservation.phone) {
+                this.errors.push('Требуется указать телефон.');
+            }
+            if (this.reservation.phone &&
+                this.reservation.phone.replace(/[^\d]/g, '').length != 12) {
+                this.errors.push('Номер телефона должен состоять из 12 цифр.');
+            }
+            if (this.reservation.master_id === null) {
+                this.errors.push('Требуется выбрать мастера.');
+            }
+            if (this.reservation.services === null) {
+                this.errors.push('Требуется выбрать услуги.');
+            }
+            if (this.reservation.date === null) {
+                this.errors.push('Требуется выбрать дату.');
+            }
+            if (this.reservation.time === null) {
+                this.errors.push('Требуется выбрать время.');
+            }
+
+            if (this.errors.length === 0) {
+                this.reservation.phone = this.reservation.phone.replace(/[^\d]/g, '')
+
+                this.axios.post('http://localhost:8876/api/reservation', {
+                    data: this.reservation
                 })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            } else {
+                e.preventDefault();
+            }
 
         },
         setDate(data) {
