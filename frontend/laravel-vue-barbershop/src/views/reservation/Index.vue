@@ -93,7 +93,8 @@
                                 </h1>
 
                                 <div>
-                                    <datepicker-component :allowedDates="availableDays" @date="setDate"></datepicker-component>
+                                    <datepicker-component :allowedDates="availableDays" @date="setDate"
+                                        @time="getTime"></datepicker-component>
                                 </div>
 
                                 <hr class="lg:my-6 border-gray-400" />
@@ -103,129 +104,14 @@
 
                                 <div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
 
-                                    <div>
-                                        <input class="peer sr-only" id="option10" type="radio" value="10" tabindex="-1"
-                                            name="time" v-model="reservation.time" />
+                                    <div v-for="time in availableTime.time">
+                                        <input class="peer sr-only" :id="`option${time}`" type="radio" :value="time"
+                                            tabindex="-1" name="time" v-model="reservation.time" />
 
-                                        <label for="option10"
+                                        <label :for="`option${time}`"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
                                             tabindex="0">
-                                            <span class="text-sm font-medium"> 10:00 </span>
-                                        </label>
-                                    </div>
-
-                                    <div>
-                                        <input class="peer sr-only" id="option20" type="radio" value="11" tabindex="-1"
-                                            name="time" v-model="reservation.time" />
-
-                                        <label for="option20"
-                                            class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
-                                            tabindex="0">
-                                            <span class="text-sm font-medium"> 11:00 </span>
-                                        </label>
-                                    </div>
-
-                                    <div>
-                                        <input class="peer sr-only" id="option30" type="radio" value="" tabindex="-1"
-                                            name="time" v-model="reservation.time" />
-
-                                        <label for="option30"
-                                            class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
-                                            tabindex="0">
-                                            <span class="text-sm font-medium"> 12:00 </span>
-                                        </label>
-                                    </div>
-
-                                    <div>
-                                        <input class="peer sr-only" id="option40" type="radio" value="" tabindex="-1"
-                                            name="time" v-model="reservation.time" />
-
-                                        <label for="option40"
-                                            class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
-                                            tabindex="0">
-                                            <span class="text-sm font-medium"> 13:00 </span>
-                                        </label>
-                                    </div>
-
-                                    <div>
-                                        <input class="peer sr-only" id="option50" type="radio" value="" tabindex="-1"
-                                            name="time" v-model="reservation.time" />
-
-                                        <label for="option50"
-                                            class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
-                                            tabindex="0">
-                                            <span class="text-sm font-medium"> 14:00 </span>
-                                        </label>
-                                    </div>
-
-                                    <div>
-                                        <input class="peer sr-only" id="option60" type="radio" value="" tabindex="-1"
-                                            name="time" v-model="reservation.time" />
-
-                                        <label for="option60"
-                                            class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
-                                            tabindex="0">
-                                            <span class="text-sm font-medium"> 15:00 </span>
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input class="peer sr-only" id="option70" type="radio" value="" tabindex="-1"
-                                            name="time" v-model="reservation.time" />
-
-                                        <label for="option70"
-                                            class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
-                                            tabindex="0">
-                                            <span class="text-sm font-medium"> 16:00 </span>
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input class="peer sr-only" id="option80" type="radio" value="" tabindex="-1"
-                                            name="time" v-model="reservation.time" />
-
-                                        <label for="option80"
-                                            class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
-                                            tabindex="0">
-                                            <span class="text-sm font-medium"> 17:00 </span>
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input class="peer sr-only" id="option90" type="radio" value="" tabindex="-1"
-                                            name="time" v-model="reservation.time" />
-
-                                        <label for="option90"
-                                            class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
-                                            tabindex="0">
-                                            <span class="text-sm font-medium"> 18:00 </span>
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input class="peer sr-only" id="option100" type="radio" value="" tabindex="-1"
-                                            name="time" v-model="reservation.time" />
-
-                                        <label for="option100"
-                                            class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
-                                            tabindex="0">
-                                            <span class="text-sm font-medium"> 19:00 </span>
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input class="peer sr-only" id="option110" type="radio" value="" tabindex="-1"
-                                            name="time" v-model="reservation.time" />
-
-                                        <label for="option110"
-                                            class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
-                                            tabindex="0">
-                                            <span class="text-sm font-medium"> 20:00 </span>
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input class="peer sr-only" id="option120" type="radio" value="" tabindex="-1"
-                                            name="time" v-model="reservation.time" />
-
-                                        <label for="option120"
-                                            class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
-                                            tabindex="0">
-                                            <span class="text-sm font-medium"> 21:00 </span>
+                                            <span class="text-sm font-medium"> {{ time }}:00 </span>
                                         </label>
                                     </div>
 
@@ -263,7 +149,8 @@ export default {
             },
             availableServices: [],
             availableMasters: [],
-            availableDays: []
+            availableDays: [],
+            availableTime: [],
         }
     },
     mounted() {
@@ -287,7 +174,15 @@ export default {
         setDate(data) {
             this.reservation.date = data.date;
         },
+        getTime() {
+            this.axios.get(`http://localhost:8876/api/available-time/${this.reservation.date}`)
+                .then(result => {
+                    this.availableTime = result.data.data
+                })
+        },
         getDate(id) {
+            this.availableTime = []
+
             this.axios.get(`http://localhost:8876/api/available-dates/${id}`)
                 .then(result => {
                     this.availableDays = result.data.data

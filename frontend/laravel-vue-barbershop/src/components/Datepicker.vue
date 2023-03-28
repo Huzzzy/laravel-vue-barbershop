@@ -43,6 +43,9 @@ export default {
             this.$emit('date', {
                 date: this.date
             })
+            this.$emit('time', {
+                date: this.date
+            })
         }
     },
     components: { VueDatePicker }
