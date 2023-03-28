@@ -17,12 +17,15 @@ class ShowAvailableTimeResource extends ReservationResource
         $availableTime = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
         $disabledTime = [];
 
-        $date = $this->ChangeDateFormatToDB($this->resource);
-
+        if (!strpos($this->resource, '-')) {
+            $date = $this->ChangeDateFormatToDB($this->resource);
+        } else {
+            $date = $this->resource;
+        }
 
         $reservations = Reservation::where('date', $date)->get();
 
-        foreach ($reservations as $reservation ) {
+        foreach ($reservations as $reservation) {
             $disabledTime[] = $reservation->time;
         }
         $availableTime = array_diff($availableTime, $disabledTime);
