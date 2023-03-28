@@ -34,8 +34,7 @@
                         </div>
 
                         <div class="rounded-none bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
-                            <form action="http://localhost:8876/api/reservation" method="post" @submit.prevent="getData"
-                                enctype="multipart/form-data" class="space-y-4">
+                            <form action="http://localhost:5173" method="get" @submit.prevent="getData" class="space-y-4">
                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                     <div>
                                         <label class="w-full lg:text-xl text-lg mb-2" for="name">Введите имя</label>
@@ -168,8 +167,6 @@ export default {
     },
     methods: {
         getData(e) {
-            console.log(this.reservation);
-
             this.errors = [];
 
             if (!this.reservation.name) {
@@ -197,18 +194,13 @@ export default {
 
             if (this.errors.length === 0) {
                 this.reservation.phone = this.reservation.phone.replace(/[^\d]/g, '')
+                console.log(this.reservation);
 
                 this.axios.post('http://localhost:8876/api/reservation', {
                     data: this.reservation
                 })
-                    .then(function (response) {
-                        console.log(response);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            } else {
-                e.preventDefault();
+
+                this.$router.push({ name: 'Main' });
             }
 
         },
