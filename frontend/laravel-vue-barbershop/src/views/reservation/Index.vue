@@ -34,7 +34,8 @@
                         </div>
 
                         <div class="rounded-none bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
-                            <form action="http://localhost:5173" method="get" @submit.prevent="getData" class="space-y-4">
+                            <form action="http://localhost:8876/api/reservation" method="post" @submit.prevent="getData"
+                                class="space-y-4" enctype="application/json">
                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                     <div>
                                         <label class="w-full lg:text-xl text-lg mb-2" for="name">Введите имя</label>
@@ -221,6 +222,12 @@ export default {
                 this.axios.post('http://localhost:8876/api/reservation', {
                     data: this.reservation
                 })
+                    .catch(function (error) {
+                        console.log(error);
+                        document.body.scrollTop = 0;
+                        document.documentElement.scrollTop = 0;
+                        this.$router.push({ name: 'Main' });
+                    });
 
                 document.body.scrollTop = 0;
                 document.documentElement.scrollTop = 0;
