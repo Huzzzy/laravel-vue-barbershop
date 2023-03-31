@@ -74,9 +74,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/client/{client}', [ClientController::class, 'show'])->name('client.show');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-
 require __DIR__ . '/auth.php';
