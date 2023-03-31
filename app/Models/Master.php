@@ -14,6 +14,11 @@ class Master extends Model
 
     public function getImageUrlAttribute()
     {
-        return url('storage/' . $this->photo);
+        if (substr($this->photo, 0, 6) === 'images') {
+            return url('storage/' . $this->photo);
+        }
+        else {
+            return $this->photo;
+        }
     }
 }
