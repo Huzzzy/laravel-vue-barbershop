@@ -1,5 +1,5 @@
 <template>
-    <VueDatePicker locale="ru" :enable-time-picker="false" auto-apply inline
+    <VueDatePicker required locale="ru" :enable-time-picker="false" auto-apply inline
         :month-change-on-scroll="false" v-model="date" @update:model-value="getDate" model-type="yyyy-MM-dd"
         :min-date="new Date(new Date().getTime() + 24 * 60 * 60 * 1000)" :allowed-dates="availableDays" />
 </template>

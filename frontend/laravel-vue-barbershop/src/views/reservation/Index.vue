@@ -34,20 +34,19 @@
                         </div>
 
                         <div class="rounded-none bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
-                            <form action="http://localhost:8876/api/reservation" method="post" @submit.prevent="getData"
-                                class="space-y-4" enctype="application/json">
+                            <form @submit.prevent="getData" class="space-y-4">
                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                     <div>
                                         <label class="w-full lg:text-xl text-lg mb-2" for="name">Введите имя</label>
                                         <input class="w-full rounded-none border-gray-200 p-3 text-sm" placeholder="Иван"
-                                            type="name" id="name" name="name" v-model="reservation.name" />
+                                            type="name" id="name" name="name" required v-model="reservation.name" />
                                     </div>
 
                                     <div>
-                                        <label class="w-full lg:text-xl text-lg mb-2" for="phone">Введите телефон</label>
+                                        <label class="w-full lg:text-xl text-lg mb-2" for="email">Введите Email</label>
                                         <input class="w-full rounded-none border-gray-200 p-3 text-sm"
-                                            placeholder="+375123456789" type="tel" id="phone" name="phone"
-                                            v-model="reservation.phone" />
+                                            placeholder="ivanov@email.com" type="email" id="email" name="email" required
+                                            v-model="reservation.email" />
                                     </div>
                                 </div>
 
@@ -61,7 +60,7 @@
                                     <div v-for="master in availableMasters">
                                         <img :src="master.photo" :alt="master.name" border="0" class="mb-2" />
                                         <input class="peer sr-only" :id="`option${master.id}`" type="radio"
-                                            :value="master.id" tabindex="-1" name="master_id"
+                                            :value="master.id" tabindex="-1" name="master_id" required
                                             v-model="reservation.master_id" />
 
                                         <label @click="getDate(master.id)" :for="`option${master.id}`"
@@ -106,7 +105,7 @@
 
                                     <div v-for="time in availableTime.time">
                                         <input class="peer sr-only" :id="`option${time}`" type="radio" :value="time"
-                                            tabindex="-1" name="time" v-model="reservation.time" />
+                                            tabindex="-1" name="time" required v-model="reservation.time" />
 
                                         <label :for="`option${time}`"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -155,7 +154,7 @@ export default {
         return {
             reservation: {
                 name: null,
-                phone: null,
+                email: null,
                 master_id: null,
                 services: [],
                 date: null,
@@ -179,12 +178,8 @@ export default {
             if (!this.reservation.name) {
                 this.errors.push('Укажите имя.');
             }
-            if (!this.reservation.phone) {
-                this.errors.push('Укажите телефон.');
-            }
-            if (this.reservation.phone &&
-                this.reservation.phone.replace(/[^\d]/g, '').length != 12) {
-                this.errors.push('Номер телефона должен состоять из 12 цифр.');
+            if (!this.reservation.email) {
+                this.errors.push('Укажите Email.');
             }
             if (this.reservation.master_id === null) {
                 this.errors.push('Выберите мастера.');
@@ -200,25 +195,16 @@ export default {
             }
             if (
                 typeof this.reservation.name !== 'string' &&
-                typeof this.reservation.phone !== 'string' &&
+                typeof this.reservation.email !== 'string' &&
                 typeof this.reservation.date !== 'string' &&
                 typeof this.reservation.master_id !== 'number' &&
                 typeof this.reservation.time !== 'number' &&
-                typeof this.reservation.services !== 'object'
+                typeof this.reservation.services !== 'string'
             ) {
                 this.errors.push('С вашим запросом что-то не так...');
             }
 
-            this.reservation.services.forEach(element => {
-                if (typeof element !== 'number') {
-                    this.errors.push('С вашим запросом что-то не так...');
-                }
-            });
-
             if (this.errors.length === 0) {
-
-                this.reservation.phone = this.reservation.phone.replace(/[^\d]/g, '')
-
                 this.axios.post('http://localhost:8876/api/reservation', {
                     data: this.reservation
                 })

@@ -32,13 +32,13 @@ class ReservationService
     {
         //Ищем пользователя в базе для того, чтобы записывать количество его записей (Программы  лояльности и тд)
         //
-        $client = Client::where('phone', $data['phone'])->first();
+        $client = Client::where('email', $data['email'])->first();
 
         if ($client !== null) {
             $client->update(['visits' => ++$client->visits]);
         } else {
             $client = Client::create([
-                'phone' => $data['phone'],
+                'email' => $data['email'],
                 'name' => $data['name'],
                 'visits' => 1,
             ]);

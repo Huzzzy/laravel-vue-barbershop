@@ -27,7 +27,7 @@
                     @csrf
 
                     <div class="form-group" id="user">
-                        <label for="user">Введите имя и номер телефона</label>
+                        <label for="user">Введите имя и email</label>
 
                         <input type="text" value="{{ old('name') }}" name="name" id="user_name" class="form-control"
                             placeholder="Имя">
@@ -35,9 +35,9 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
 
-                        <input type="phone" value="{{ old('phone') }}" name="phone" id="user_phone"
-                            class="form-control" placeholder="Телефон">
-                        @error('phone')
+                        <input type="email" value="{{ old('email') }}" name="email" id="user_email"
+                            class="form-control" placeholder="Email">
+                        @error('email')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
@@ -164,7 +164,7 @@
 
         function reset() {
             $('#user_name').val('');
-            $('#user_phone').val('');
+            $('#user_email').val('');
             $('#date_input').val('');
             $('#select_time').empty();
             $('#master_id').val('');

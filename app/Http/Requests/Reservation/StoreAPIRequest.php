@@ -23,7 +23,7 @@ class StoreAPIRequest extends FormRequest
     {
         return [
             'data.name' => 'string',
-            'data.phone' => 'string|min:12|max:12',
+            'data.email' => 'string|email',
             'data.master_id' => 'integer|exists:masters,id',
             'data.date' => '',
             'data.time' => '',
@@ -38,12 +38,11 @@ class StoreAPIRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if (isset($this->date, $this->phone)) {
+        if (isset($this->date)) {
             $date = explode('/', $this->date);
             list($date[0], $date[1], $date[2]) = [$date[2], $date[0], $date[1]];
             $date = implode('-', $date);
             $this->merge([
-                'phone' => preg_replace('~\D+~', '', $this->phone),
                 'date' => $date,
             ]);
         }

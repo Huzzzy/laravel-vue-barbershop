@@ -34,8 +34,8 @@
                     </div>
 
                     <div class="form-group">
-                        <input disabled type="phone" name="phone" class="form-control"
-                            placeholder="+{{ $reservation->client->phone }}">
+                        <input disabled type="email" name="email" class="form-control"
+                            placeholder="{{ $reservation->client->email }}">
                     </div>
 
                     <div class="form-group" id="service">

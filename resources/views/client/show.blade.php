@@ -39,8 +39,8 @@
                                         <td>{{ $client->name }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Телефон</th>
-                                        <td>+{{ $client->phone }}</td>
+                                        <th>Email</th>
+                                        <td>{{ $client->email }}</td>
                                     </tr>
                                     <tr>
                                         <th>Сколько раз посещал</th>
