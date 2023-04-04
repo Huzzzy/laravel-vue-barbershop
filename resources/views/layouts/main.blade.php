@@ -88,14 +88,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('photo.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-images"></i>
-                                <p>
-                                    Фото
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{ route('reservation.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-pen"></i>
                                 <p>

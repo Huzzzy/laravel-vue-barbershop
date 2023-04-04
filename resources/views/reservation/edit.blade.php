@@ -30,12 +30,12 @@
 
                     <div class="form-group">
                         <input disabled type="text" name="name" class="form-control"
-                            placeholder="{{ $reservation->user->name }}">
+                            placeholder="{{ $reservation->client->name }}">
                     </div>
 
                     <div class="form-group">
                         <input disabled type="phone" name="phone" class="form-control"
-                            placeholder="+{{ $reservation->user->phone }}">
+                            placeholder="+{{ $reservation->client->phone }}">
                     </div>
 
                     <div class="form-group" id="service">
@@ -62,7 +62,8 @@
                     <div class="form-group" id="master">
                         <label for="master">Выберите мастера</label>
 
-                        <select name="master_id" id="master_id" class="form-control select2" style="width: 100%;">
+                        <select name="master_id" id="master_id" class="form-control select2" style="width: 100%;"
+                            onchange="getDates()">
                             <option selected="selected" disabled>Выберите мастера</option>
                             @foreach ($masters as $master)
                                 <option value="{{ $master->id }}"
@@ -75,9 +76,6 @@
                         @error('master_id')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
-
-                        <input type="button" value="Подтвердить" onclick="getDates()" class="btn btn-primary mt-2"
-                            id="master_btn">
                     </div>
 
                     <div class="form-group" id="date">
@@ -87,7 +85,7 @@
                             <input name="date" id="date_input" type="text" class="form-control datetimepicker-input"
                                 data-target="#datetimepicker-reservation-edit" />
                             <div class="input-group-append" data-target="#datetimepicker-reservation-edit"
-                                data-toggle="datetimepicker" onclick="getDateBtn()">
+                                data-toggle="datetimepicker" onclick="getTime()">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
                         </div>
@@ -95,15 +93,13 @@
                         @error('date')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
-
-                        <input type="button" value="Подтвердить" onclick="getTime()" class="btn btn-primary mt-2 invisible"
-                            id="date_btn">
                     </div>
 
                     <div class="form-group" id="time">
                         <label for="time">Выберите время</label>
 
-                        <select name="time" class="form-control select2" style="width: 100%;" id="select_time">
+                        <select name="time" class="form-control select2" style="width: 100%;" id="select_time"
+                            onchange="getConfirmation()">
                             <option selected="selected" disabled>Выберите время</option>
                         </select>
 
@@ -117,9 +113,6 @@
                             <input type="submit" class="btn btn-primary mt-2" value="Обновить">
                         </div>
 
-                        <div class="form-group" id="reset">
-                            <input type="button" class="btn btn-primary mt-2" value="Сбросить" onclick="reset()">
-                        </div>
                     </div>
                 </form>
             </div>
@@ -140,12 +133,8 @@
             reservationDate = document.querySelector('.reservation-date').getAttribute('data-attr')
         }
 
-        function getMasterBtn() {
-            document.getElementById("master_btn").classList.remove("invisible");
-        }
-
-        function getDateBtn() {
-            document.getElementById("date_btn").classList.remove("invisible");
+        function getConfirmation() {
+            document.getElementById("confirmation").classList.remove("invisible");
         }
 
         function getDates() {
@@ -171,7 +160,6 @@
 
         function getTime() {
             $('#select_time').empty();
-            document.getElementById("date_btn").classList.add("invisible");
 
             var select = document.getElementById("date_input");
             var time = select.value;

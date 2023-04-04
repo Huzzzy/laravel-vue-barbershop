@@ -47,16 +47,6 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{service}', [ServiceController::class, 'delete'])->name('service.delete');
     });
 
-    Route::group(['prefix' => 'photos'], function () {
-        Route::get('/', [PhotoController::class, 'index'])->name('photo.index');
-        Route::get('/create', [PhotoController::class, 'create'])->name('photo.create');
-        Route::post('/', [PhotoController::class, 'store'])->name('photo.store');
-        Route::get('/{photo}/edit', [PhotoController::class, 'edit'])->name('photo.edit');
-        Route::get('/{photo}', [PhotoController::class, 'show'])->name('photo.show');
-        Route::patch('/{photo}', [PhotoController::class, 'update'])->name('photo.update');
-        Route::delete('/{photo}', [PhotoController::class, 'delete'])->name('photo.delete');
-    });
-
     Route::group(['prefix' => 'reservations'], function () {
         Route::get('/', [ReservationController::class, 'index'])->name('reservation.index');
         Route::get('/last', [ReservationController::class, 'last'])->name('reservation.last');

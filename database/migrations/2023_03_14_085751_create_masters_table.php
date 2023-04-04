@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('masters', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->longText('description');
             $table->string('photo');
             $table->json('available_days');
             $table->timestamps();
