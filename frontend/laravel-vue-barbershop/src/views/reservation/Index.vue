@@ -204,7 +204,6 @@ export default {
             availableDays: [],
             availableTime: [],
             errors: [],
-            reservationId: null,
             isOpen: false,
             otpCode: null,
             inputOtpCode: null,
@@ -299,35 +298,21 @@ export default {
             ) {
                 this.errors.push('С вашим запросом что-то не так...');
             }
-            if (this.inputOtpCode == this.otpCode) {
+            if (this.inputOtpCode != this.otpCode) {
                 this.errors.push('Код подтверждения не совпадает!');
             }
 
-            console.log(this.reservation);
             if (this.errors.length === 0) {
                 this.axios.post('http://localhost:8876/api/reservation', {
                     data: this.reservation
                 })
-                    .then(function (responce) {
-                        this.reservationId = responce.data.id
-                    })
                     .catch(function (error) {
                         console.log(error);
-                        document.body.scrollTop = 0;
-                        document.documentElement.scrollTop = 0;
-                        // this.$router.push({ name: 'Main' });
                     });
 
-
-                console.log(this.reservationId);
-                if (this.reservationId != null) {
-                    document.body.scrollTop = 0;
-                    document.documentElement.scrollTop = 0;
-                    this.$router.push({ name: 'Details', params: { id: this.reservationId } });
-                }
-                // document.body.scrollTop = 0;
-                // document.documentElement.scrollTop = 0;
-                // this.$router.push({ name: 'Details', params: { id: this.reservationId } });
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+                this.$router.push({ path: `/reservation/details/${this.reservation.email}` });
             }
         },
         setDate(data) {
@@ -361,7 +346,6 @@ export default {
                     this.availableServices = result.data.data
                 })
         },
-
     },
     components: {
         DatepickerComponent

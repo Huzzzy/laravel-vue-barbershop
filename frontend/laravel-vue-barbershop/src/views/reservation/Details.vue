@@ -10,37 +10,30 @@
                             Ваша запись
                         </h1>
                         <p class="mt-10 font-light lg:text-lg text-lg text-neutral-900">
-                            Имя: {{ this.$router.params.id }}
+                            Имя:
+                        <div>{{ this.reservation.name }}</div>
                         </p>
                         <p class="mt-10 font-light lg:text-lg text-lg text-neutral-900">
-                            Email: {{  }}
+                            Email:
+                        <div>{{ this.reservation.email }}</div>
                         </p>
                         <p class="mt-10 font-light lg:text-lg text-lg text-neutral-900">
-                            Услуги: {{  }}
+                            Услуги:
+                        <div v-for="service in this.reservation.services">{{ service }}</div>
                         </p>
                         <p class="mt-10 font-light lg:text-lg text-lg text-neutral-900">
-                            Мастер: {{  }}
+                            Мастер:
+                        <div>{{ this.reservation.master }}</div>
                         </p>
                         <p class="mt-10 font-light lg:text-lg text-lg text-neutral-900">
-                            Дата: {{  }}
+                            Дата:
+                        <div>{{ this.reservation.date }}</div>
                         </p>
                         <p class="mt-10 font-light lg:text-lg text-lg text-neutral-900">
-                            Время: {{  }}
+                            Время:
+                        <div>{{ this.reservation.time }}:00</div>
                         </p>
                     </div>
-                    <div>
-
-
-                        <!-- <div class="columns-2 mt-24">
-                            <h1 class="text-neutral-900 font-normal lg:text-2xl text-xl">
-                            </h1>
-                            <h1 class="text-neutral-900 font-normal lg:text-2xl text-xl">
-                            </h1>
-                        </div>
-                        <hr class="lg:my-6 border-neutral-400" /> -->
-                    </div>
-                    <router-link to="/reservation"
-                        class="btn rounded-none text-white mt-5 hover:bg-zinc-900">Записаться</router-link>
                 </div>
             </div>
         </section>
@@ -50,18 +43,39 @@
 export default {
     name: "Details",
 
-
     data() {
         return {
+            reservation: {
+                name: null,
+                email: null,
+                master: null,
+                services: [],
+                date: null,
+                time: null,
+            },
         }
     },
 
     mounted() {
-
+        this.getReservation()
     },
-
     methods: {
-
+        getReservation() {
+            this.axios.get(`http://localhost:8876/api/reservation/${this.$router.currentRoute.value.params.email}`)
+                .then(result => {
+                    this.reservation = result.data.data
+                    var date = result.data.data.date
+                    date = date.split('-')
+                    var date = new Date(date[0], --date[1], date[2])
+                    var options = {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        weekday: 'long',
+                    };
+                    this.reservation.date = date.toLocaleString("ru", options)
+                })
+        }
     }
 }
 </script>
