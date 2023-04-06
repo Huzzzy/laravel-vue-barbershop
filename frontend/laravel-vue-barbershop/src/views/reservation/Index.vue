@@ -34,7 +34,7 @@
                         </div>
 
                         <div class="rounded-none bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
-                            <form @submit.prevent="getData" class="space-y-4">
+                            <form @submit.prevent="confirm" class="space-y-4">
                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                     <div>
                                         <label class="w-full lg:text-xl text-lg mb-2" for="name">Введите имя</label>
@@ -116,18 +116,57 @@
 
                                 </div>
 
-                                <div class="pt-10 flex justify-center">
-                                    <button type="submit"
-                                        class="inline-block w-full rounded-none bg-black px-5 py-3 font-medium text-white sm:w-auto hover:bg-zinc-800">
-                                        Подтведить
-                                    </button>
+                                <!-- <div class="pt-10 flex justify-center"> -->
+                                <div class="container mx-auto">
+                                    <div class="flex justify-center">
+                                        <button @click="getEmailModal()"
+                                            class="inline-block w-full rounded-none bg-black px-5 py-3 font-medium text-white sm:w-auto hover:bg-zinc-800"
+                                            type="button">
+                                            Подтвердить
+                                        </button>
+
+                                        <div v-show="isOpen"
+                                            class=" absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50">
+                                            <div class="max-w-2xl p-6 bg-white rounded-md shadow-xl">
+                                                <div class="flex items-center justify-between">
+                                                    <h3 class="text-2xl text-center mt-5">Введите код, который мы отправили
+                                                        вам
+                                                        на ваш Email: {{ reservation.email }}</h3>
+                                                    <button class="btn btn-square ml-10" type="button"
+                                                        @click="isOpen = false">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                            viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                                <div class="otp w-full flex justify-around mt-10">
+                                                    <input ref="firstInputEl" v-model="inputOtpCode" type="text"
+                                                        maxlength="4" class="border rounded w-20 h-10 text-center"
+                                                        @input="getSubmit(), getCode()" />
+                                                </div>
+                                                <div class="absolute invisible" id="otp">
+                                                    <div class="pt-5 flex justify-center">
+                                                        <button type="submit"
+                                                            class="inline-block w-full rounded-none bg-black px-5 py-3 font-medium text-white sm:w-auto hover:bg-zinc-800">
+                                                            Подтведить
+                                                        </button>
+                                                    </div>
+                                                    <div class="mt-5">
+                                                        <p class="text-center">
+                                                            Подтверждая, вы даете согласие на обработку персональных данных
+                                                            и соглашаетесь
+                                                            c политикой конфиденциальности
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="text-center">
-                                        Подтверждая, вы даете согласие на обработку персональных данных и соглашаетесь
-                                        c политикой конфиденциальности
-                                    </p>
-                                </div>
+
+
                                 <div>
                                     <p v-if="errors.length">
                                         <b>Пожалуйста исправьте указанные ошибки:</b>
@@ -165,6 +204,10 @@ export default {
             availableDays: [],
             availableTime: [],
             errors: [],
+            reservationId: null,
+            isOpen: false,
+            otpCode: null,
+            inputOtpCode: null,
         }
     },
     mounted() {
@@ -172,7 +215,14 @@ export default {
             this.getServices()
     },
     methods: {
-        getData(e) {
+        getSubmit() {
+            document.getElementById("otp").classList.add("absolute", "invisible");
+
+            if (this.inputOtpCode == this.otpCode && this.otpCode != null) {
+                document.getElementById("otp").classList.remove("absolute", "invisible");
+            }
+        },
+        getEmailModal() {
             this.errors = [];
 
             if (!this.reservation.name) {
@@ -193,6 +243,52 @@ export default {
             if (this.reservation.time === null) {
                 this.errors.push('Выберите время.');
             }
+            if (this.errors.length === 0) {
+
+                this.axios.post('http://localhost:8876/api/reservation/otp', {
+                    data: this.reservation.email
+                })
+                    .then(function (responce) {
+                        console.log(responce);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+                this.isOpen = true
+            }
+        },
+        getCode() {
+            this.axios.get(`http://localhost:8876/api/reservation/otp/${this.reservation.email}`)
+                .then(result => {
+                    this.otpCode = result.data.data.code
+                })
+        },
+        confirm(e) {
+            this.errors = [];
+
+            if (!this.reservation.name) {
+                this.errors.push('Укажите имя.');
+            }
+            if (!this.reservation.email) {
+                this.errors.push('Укажите Email.');
+            }
+            if (this.reservation.master_id === null) {
+                this.errors.push('Выберите мастера.');
+            }
+            if (this.reservation.services.length === 0) {
+                this.errors.push('Выберите услуги.');
+            }
+            if (this.reservation.date === null) {
+                this.errors.push('Выберите дату.');
+            }
+            if (this.reservation.time === null) {
+                this.errors.push('Выберите время.');
+            }
+            if (this.errors.length === 0) {
+                console.log(this.reservation);
+                this.isOpen = true
+            }
             if (
                 typeof this.reservation.name !== 'string' &&
                 typeof this.reservation.email !== 'string' &&
@@ -203,23 +299,36 @@ export default {
             ) {
                 this.errors.push('С вашим запросом что-то не так...');
             }
+            if (this.inputOtpCode == this.otpCode) {
+                this.errors.push('Код подтверждения не совпадает!');
+            }
 
+            console.log(this.reservation);
             if (this.errors.length === 0) {
                 this.axios.post('http://localhost:8876/api/reservation', {
                     data: this.reservation
                 })
+                    .then(function (responce) {
+                        this.reservationId = responce.data.id
+                    })
                     .catch(function (error) {
                         console.log(error);
                         document.body.scrollTop = 0;
                         document.documentElement.scrollTop = 0;
-                        this.$router.push({ name: 'Main' });
+                        // this.$router.push({ name: 'Main' });
                     });
 
-                document.body.scrollTop = 0;
-                document.documentElement.scrollTop = 0;
-                this.$router.push({ name: 'Main' });
-            }
 
+                console.log(this.reservationId);
+                if (this.reservationId != null) {
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
+                    this.$router.push({ name: 'Details', params: { id: this.reservationId } });
+                }
+                // document.body.scrollTop = 0;
+                // document.documentElement.scrollTop = 0;
+                // this.$router.push({ name: 'Details', params: { id: this.reservationId } });
+            }
         },
         setDate(data) {
             this.reservation.date = data.date;
@@ -251,7 +360,8 @@ export default {
                 .then(result => {
                     this.availableServices = result.data.data
                 })
-        }
+        },
+
     },
     components: {
         DatepickerComponent

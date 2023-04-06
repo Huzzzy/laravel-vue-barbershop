@@ -25,6 +25,8 @@ Route::get('/available-dates/{master}', [ReservationController::class, 'showAvai
 Route::get('/available-time/{date}', [ReservationController::class, 'showAvailableTime'])->where('date', '.*');
 
 Route::post('/reservation', [ReservationController::class, 'store']);
+Route::post('/reservation/otp', [ReservationController::class, 'send']);
+Route::get('/reservation/otp/{email}', [ReservationController::class, 'getCode']);
 
 Route::get('/services',[ServiceController::class, 'index']);
 Route::get('/masters',[MasterController::class, 'index']);
