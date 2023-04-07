@@ -35,7 +35,10 @@ class ReservationService
         $client = Client::where('email', $data['email'])->first();
 
         if ($client !== null) {
-            $client->update(['visits' => ++$client->visits]);
+            $client->update([
+                'visits' => ++$client->visits,
+                'name' => $data['name']
+            ]);
         } else {
             $client = Client::create([
                 'email' => $data['email'],
