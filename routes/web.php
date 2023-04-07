@@ -63,6 +63,7 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['prefix' => 'clients'], function () {
         Route::get('/', [ClientController::class, 'index'])->name('client.index');
+        Route::post('/search', [ClientController::class, 'search'])->name('client.search');
         Route::get('/create', [ClientController::class, 'create'])->name('client.create');
         Route::post('/', [ClientController::class, 'store'])->name('client.store');
         Route::get('/{client}/edit', [ClientController::class, 'edit'])->name('client.edit');

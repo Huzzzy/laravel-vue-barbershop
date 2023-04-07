@@ -15,6 +15,16 @@ class ClientController extends Controller
 
         return view('client.index', compact('clients'));
     }
+    public function search()
+    {
+        $data = request()->validate([
+            'query' => 'required|string'
+        ]);
+
+        $client = Client::where('email', $data['query'])->first();
+
+        return view('client.search', compact('client'));
+    }
     public function show(Client $client)
     {
         return view('client.show', compact('client'));
