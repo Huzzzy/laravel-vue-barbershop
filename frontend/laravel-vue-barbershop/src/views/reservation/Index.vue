@@ -130,11 +130,11 @@
                                         <div v-show="isOpen"
                                             class=" absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50">
                                             <div class="max-w-2xl p-6 bg-white rounded-md shadow-xl">
-                                                <div class="flex items-center justify-between">
-                                                    <h3 class="text-2xl text-center mt-5">Введите код, который мы отправили
+                                                <div class="flex content-start justify-between">
+                                                    <h3 class="lg:text-2xl text-xl text-center mt-5">Введите код, который мы отправили
                                                         вам
                                                         на ваш Email: {{ reservation.email }}</h3>
-                                                    <button class="btn btn-square ml-10" type="button"
+                                                    <button class="btn btn-square lg:ml-10 ml-2 mt-3" type="button"
                                                         @click="isOpen = false">
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                                             viewBox="0 0 24 24" stroke="currentColor">
@@ -144,7 +144,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="otp w-full flex justify-around mt-10">
-                                                    <input ref="firstInputEl" v-model="inputOtpCode" type="text"
+                                                    <input ref="firstInputEl" v-model="inputOtpCode" type="number"
                                                         maxlength="4" class="border rounded w-20 h-10 text-center"
                                                         @input="getSubmit(), getCode()" @keypress.enter.prevent />
                                                 </div>
@@ -263,7 +263,7 @@ export default {
                     data: this.reservation.email
                 })
                     .then(function (responce) {
-                        console.log(responce);
+                        // console.log(responce);
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -300,7 +300,7 @@ export default {
                 this.errors.push('Выберите время.');
             }
             if (this.errors.length === 0) {
-                console.log(this.reservation);
+                // console.log(this.reservation);
                 this.isOpen = true
             }
             if (
