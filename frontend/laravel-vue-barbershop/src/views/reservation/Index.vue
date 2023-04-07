@@ -39,14 +39,15 @@
                                     <div>
                                         <label class="w-full lg:text-xl text-lg mb-2" for="name">Введите имя</label>
                                         <input class="w-full rounded-none border-gray-200 p-3 text-sm" placeholder="Иван"
-                                            type="name" id="name" name="name" required v-model="reservation.name" />
+                                            type="name" id="name" name="name" required v-model="reservation.name"
+                                            @keypress.enter.prevent />
                                     </div>
 
                                     <div>
                                         <label class="w-full lg:text-xl text-lg mb-2" for="email">Введите Email</label>
                                         <input class="w-full rounded-none border-gray-200 p-3 text-sm"
                                             placeholder="ivanov@email.com" type="email" id="email" name="email" required
-                                            v-model="reservation.email" />
+                                            v-model="reservation.email" @keypress.enter.prevent @change="isOpen = false" />
                                     </div>
                                 </div>
 
@@ -61,7 +62,7 @@
                                         <img :src="master.photo" :alt="master.name" border="0" class="mb-2" />
                                         <input class="peer sr-only" :id="`option${master.id}`" type="radio"
                                             :value="master.id" tabindex="-1" name="master_id" required
-                                            v-model="reservation.master_id" />
+                                            v-model="reservation.master_id" @keypress.enter.prevent />
 
                                         <label @click="getDate(master.id)" :for="`option${master.id}`"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -81,7 +82,7 @@
                                         <label v-for="service in availableServices" class="label cursor-pointer">
                                             <span class="label-text">{{ service.title }}</span>
                                             <input type="checkbox" name="services[]" v-model="reservation.services"
-                                                :value="service.id" class="checkbox" />
+                                                :value="service.id" class="checkbox" @keypress.enter.prevent />
                                         </label>
                                     </div>
                                 </div>
@@ -105,7 +106,8 @@
 
                                     <div v-for="time in availableTime.time">
                                         <input class="peer sr-only" :id="`option${time}`" type="radio" :value="time"
-                                            tabindex="-1" name="time" required v-model="reservation.time" />
+                                            tabindex="-1" name="time" required v-model="reservation.time"
+                                            @keypress.enter.prevent />
 
                                         <label :for="`option${time}`"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
@@ -144,7 +146,12 @@
                                                 <div class="otp w-full flex justify-around mt-10">
                                                     <input ref="firstInputEl" v-model="inputOtpCode" type="text"
                                                         maxlength="4" class="border rounded w-20 h-10 text-center"
-                                                        @input="getSubmit(), getCode()" />
+                                                        @input="getSubmit(), getCode()" @keypress.enter.prevent />
+                                                </div>
+                                                <div class="absolute invisible" id="wrong">
+                                                    <p class="text-center text-lg text-red-700 mt-3">
+                                                        Неверный код!
+                                                    </p>
                                                 </div>
                                                 <div class="absolute invisible" id="otp">
                                                     <div class="pt-5 flex justify-center">
@@ -165,7 +172,6 @@
                                         </div>
                                     </div>
                                 </div>
-
 
                                 <div>
                                     <p v-if="errors.length">
@@ -216,8 +222,17 @@ export default {
     methods: {
         getSubmit() {
             document.getElementById("otp").classList.add("absolute", "invisible");
+            document.getElementById("wrong").classList.add("absolute", "invisible");
+
+
+            if (String(this.inputOtpCode).length == String(this.otpCode).length
+                &&
+                this.otpCode != this.inputOtpCode) {
+                document.getElementById("wrong").classList.remove("absolute", "invisible");
+            }
 
             if (this.inputOtpCode == this.otpCode && this.otpCode != null) {
+                document.getElementById("wrong").classList.add("absolute", "invisible");
                 document.getElementById("otp").classList.remove("absolute", "invisible");
             }
         },
