@@ -61,7 +61,15 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show');
 
-    Route::get('/client/{client}', [ClientController::class, 'show'])->name('client.show');
+    Route::group(['prefix' => 'clients'], function () {
+        Route::get('/', [ClientController::class, 'index'])->name('client.index');
+        Route::get('/create', [ClientController::class, 'create'])->name('client.create');
+        Route::post('/', [ClientController::class, 'store'])->name('client.store');
+        Route::get('/{client}/edit', [ClientController::class, 'edit'])->name('client.edit');
+        Route::get('/{client}', [ClientController::class, 'show'])->name('client.show');
+        Route::patch('/{client}', [ClientController::class, 'update'])->name('client.update');
+        Route::delete('/{client}', [ClientController::class, 'delete'])->name('client.delete');
+    });
 });
 
 require __DIR__ . '/auth.php';

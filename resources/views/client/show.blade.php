@@ -26,6 +26,19 @@
 
                 <div class="col-12">
                     <div class="card">
+                        <div class="card-header d-flex p-3">
+                            <div class="mr-2">
+                                <a href="{{ route('client.edit', $client->id) }}"
+                                    class="btn btn-primary">Редактировать</a>
+                            </div>
+                            <div class="mr-2">
+                                <form action="{{ route('client.delete', $client->id) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <input type="submit" value="Удалить" class="btn btn-danger">
+                                </form>
+                            </div>
+                        </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover text-nowrap">
