@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Models\Reservation;
 use Illuminate\Support\Carbon;
 use App\Models\ReservationCode;
 use Illuminate\Console\Scheduling\Schedule;
@@ -14,11 +15,23 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        //Удаление кодов записи каждый день
         $schedule->call(function () {
-            $codes = ReservationCode::all()->where('created_at', '<', Carbon::today()->toDateTimeString());
-            $codes->delete();
-        })->everyFiveMinutes();
+            $codes = ReservationCode::all()->where('created_at', '<', Carbon::today());
+            foreach ($codes as $code ) {
+                $code->delete();
+            }
+        })->daily();
+
+        //Удалнение записей, дата которых уже прошла
+        $schedule->call(function () {
+            $reservations = Reservation::all()->where('date', '<', Carbon::today()->subDay()->toDateTimeString());
+            foreach ($reservations as $reservation ) {
+                $reservation->delete();
+            }
+        })->everyMinute();
+
+
     }
 
     /**
