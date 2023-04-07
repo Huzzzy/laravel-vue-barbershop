@@ -9,7 +9,7 @@
                 <div class="container relative mx-auto">
                     <div class="items-center flex flex-wrap">
                         <div class="w-full lg:w-4/6 px-4 ml-auto mr-auto text-center">
-                            <div class="pr-12 pt-20">
+                            <div class="pt-20">
                                 <h1 class="text-white font-normal lg:text-5xl text-4xl">
                                     Здесь ты не просто стрижешься,
                                     ты заботишься о своем стиле!

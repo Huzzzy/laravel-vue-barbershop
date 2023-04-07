@@ -5,7 +5,7 @@
         <section class="pb-20 bg-neutral-200">
             <div class="container relative mx-auto">
                 <div class="w-full lg:w-4/6 px-4 ml-auto mr-auto text-center">
-                    <div class="pr-12 pt-20">
+                    <div class="pt-20">
                         <h1 class="text-neutral-900 font-normal lg:text-5xl text-4xl">
                             Ваша запись
                         </h1>
