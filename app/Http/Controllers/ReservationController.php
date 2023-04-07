@@ -31,6 +31,7 @@ class ReservationController extends Controller
             ['date', 'asc'],
             ['time', 'asc']
         ]);
+
         //Более читабельный вид дат
         foreach ($reservations as $reservation) {
             $reservation->date = $this->service->ChangeDataFormat($reservation->date);
@@ -42,8 +43,7 @@ class ReservationController extends Controller
     public function last()
     {
         $yesterday = Carbon::today()->subDay()->toDateTimeString();
-        $reservations = Reservation::all()->where('created_at', '>', $yesterday);
-
+        $reservations = Reservation::all()->where('created_at', '>', $yesterday)->sortByDesc('id');
         //Более читабельный вид дат
         foreach ($reservations as $reservation) {
             $reservation->date = $this->service->ChangeDataFormat($reservation->date);
@@ -121,10 +121,13 @@ class ReservationController extends Controller
     {
         $client = Client::where('id', $reservation->client_id)->first();
 
-        $client->update(['status' => 0]); // 1 - это есть актиная запись
-        // 0 - это нет неактивной записи
-
         $reservation->delete();
+
+        //Если записей больше нет с этим пользователем - ставим статус: "нет активной записи"
+        if (Reservation::all()->where('client_id', $client->id)->count() === 0) {
+            $client->update(['status' => 0]); // 1 - это есть актиная запись
+            // 0 - это нет неактивной записи
+        }
 
         return redirect()->route('reservation.index');
     }
