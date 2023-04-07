@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Models\Client;
 use App\Models\Reservation;
 use Illuminate\Support\Carbon;
 use App\Models\ReservationCode;
@@ -18,7 +19,7 @@ class Kernel extends ConsoleKernel
         //Удаление кодов записи каждый день
         $schedule->call(function () {
             $codes = ReservationCode::all()->where('created_at', '<', Carbon::today());
-            foreach ($codes as $code ) {
+            foreach ($codes as $code) {
                 $code->delete();
             }
         })->daily();
@@ -26,12 +27,22 @@ class Kernel extends ConsoleKernel
         //Удалнение записей, дата которых уже прошла
         $schedule->call(function () {
             $reservations = Reservation::all()->where('date', '<', Carbon::today()->subDay()->toDateTimeString());
-            foreach ($reservations as $reservation ) {
+            foreach ($reservations as $reservation) {
                 $reservation->delete();
             }
-        })->everyMinute();
+        })->daily();
 
-
+        //Смена статусов клиентов, если у них нету активных записей
+        $schedule->call(function () {
+            $clients = Client::all();
+            foreach ($clients as $client) {
+                if (Reservation::where('client_id', $client->id)->count() === 0) {
+                    $client->update([
+                        'status' => 0
+                    ]);
+                }
+            }
+        })->daily();
     }
 
     /**
@@ -39,7 +50,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
