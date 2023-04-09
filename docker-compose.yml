@@ -23,6 +23,18 @@ services:
     depends_on:
       - db
 
+  client:
+    build:
+      context: .
+      dockerfile: _docker/client/Dockerfile
+    volumes:
+      - ./frontend/laravel-vue-barbershop:/var/www/client
+    ports:
+      - 8875:80
+    container_name: laravel_vue_barbershop_client
+    depends_on:
+      - app
+
   db:
     image: mysql:8.0
     restart: always
