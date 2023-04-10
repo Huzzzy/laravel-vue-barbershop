@@ -30,7 +30,7 @@ services:
     volumes:
       - ./frontend/laravel-vue-barbershop:/var/www/client
     ports:
-      - 3000:80
+      - 80:80
     container_name: laravel_vue_barbershop_client
     depends_on:
       - app
