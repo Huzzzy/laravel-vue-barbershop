@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Барбершоп</title>
+        <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css"
+        />
+        <script src="https://cdn.tailwindcss.com/3.2.4"></script>
+        <script>
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    fontFamily: {
+                        sans: ["Roboto", "sans-serif"],
+                        body: ["Roboto", "sans-serif"],
+                        mono: ["ui-monospace", "monospace"],
+                    },
+                },
+                corePlugins: {
+                    preflight: false,
+                },
+            };
+        </script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.2.3/dist/cdn.min.js"
+        ></script>
+        <!-- <script
+            type="text/javascript"
+            charset="utf-8"
+            async
+            src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A4cde70524711a8f3487f0c13984859653005ca85378918814daf0cb4c3fcd42c&amp;width=100%25&amp;height=240&amp;lang=ru_RU&amp;scroll=true"
+        ></script> -->
+      <script type="module" crossorigin src="/assets/index-c703d499.js"></script>
+      <link rel="stylesheet" href="/assets/index-944500f5.css">
+    </head>
+    <body>
+        <div id="app"></div>
+        <button
+            x-data="topBtn"
+            @click="scrolltoTop"
+            id="topButton"
+            class="fixed z-10 hidden p-3 bg-gray-100 rounded-full shadow-md bottom-10 right-10 animate-bounce"
+        >
+            <svg
+                class="w-8 h-8"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2.5"
+                    d="M5 10l7-7m0 0l7 7m-7-7v18"
+                ></path>
+            </svg>
+        </button>
+        
+        <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+        <script>
+            document.addEventListener("alpine:init", () => {
+                Alpine.data("topBtn", () => ({
+                    scrolltoTop() {
+                        document.body.scrollTop = 0;
+                        document.documentElement.scrollTop = 0;
+                    },
+                }));
+            });
+
+            const topBtn = document.getElementById("topButton");
+            window.onscroll = () => {
+                document.body.scrollTop > 20 ||
+                document.documentElement.scrollTop > 20
+                    ? topBtn.classList.remove("hidden")
+                    : topBtn.classList.add("hidden");
+            };
+        </script>
+    </body>
+</html>
