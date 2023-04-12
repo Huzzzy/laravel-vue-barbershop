@@ -259,7 +259,7 @@ export default {
             }
             if (this.errors.length === 0) {
 
-                this.axios.post('http://localhost:8876/api/reservation/otp', {
+                this.axios.post('https://admin.mybarbershop24.ru/api/reservation/otp', {
                     data: this.reservation.email
                 })
                     .then(function (responce) {
@@ -273,7 +273,7 @@ export default {
             }
         },
         getCode() {
-            this.axios.get(`http://localhost:8876/api/reservation/otp/${this.reservation.email}`)
+            this.axios.get(`https://admin.mybarbershop24.ru/api/reservation/otp/${this.reservation.email}`)
                 .then(result => {
                     this.otpCode = result.data.data.code
                 })
@@ -318,7 +318,7 @@ export default {
             }
 
             if (this.errors.length === 0) {
-                this.axios.post('http://localhost:8876/api/reservation', {
+                this.axios.post('https://admin.mybarbershop24.ru/api/reservation', {
                     data: this.reservation
                 })
                     .catch(function (error) {
@@ -334,7 +334,7 @@ export default {
             this.reservation.date = data.date;
         },
         getTime() {
-            this.axios.get(`http://localhost:8876/api/available-time/${this.reservation.date}`)
+            this.axios.get(`https://admin.mybarbershop24.ru/api/available-time/${this.reservation.date}`)
                 .then(result => {
                     this.availableTime = result.data.data
                 })
@@ -344,19 +344,19 @@ export default {
             this.reservation.date = null
             this.availableTime = []
 
-            this.axios.get(`http://localhost:8876/api/available-dates/${id}`)
+            this.axios.get(`https://admin.mybarbershop24.ru/api/available-dates/${id}`)
                 .then(result => {
                     this.availableDays = result.data.data
                 })
         },
         getMasters() {
-            this.axios.get('http://localhost:8876/api/masters')
+            this.axios.get('https://admin.mybarbershop24.ru/api/masters')
                 .then(result => {
                     this.availableMasters = result.data.data
                 })
         },
         getServices() {
-            this.axios.get('http://localhost:8876/api/services')
+            this.axios.get('https://admin.mybarbershop24.ru/api/services')
                 .then(result => {
                     this.availableServices = result.data.data
                 })

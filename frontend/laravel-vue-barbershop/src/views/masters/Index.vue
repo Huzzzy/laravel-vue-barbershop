@@ -39,7 +39,7 @@ export default {
 
     methods: {
         getMasters() {
-            this.axios.get('http://localhost:8876/api/masters')
+            this.axios.get('https://admin.mybarbershop24.ru/api/masters')
                 .then(result => {
                     this.masters = result.data.data
                 })

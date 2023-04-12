@@ -50,7 +50,7 @@ export default {
 
     methods: {
         getServices() {
-            this.axios.get('http://localhost:8876/api/services')
+            this.axios.get('https://admin.mybarbershop24.ru/api/services')
                 .then(result => {
                     this.services = result.data.data
                 })

@@ -61,7 +61,7 @@ export default {
     },
     methods: {
         getReservation() {
-            this.axios.get(`http://localhost:8876/api/reservation/${this.$router.currentRoute.value.params.email}`)
+            this.axios.get(`https://admin.mybarbershop24.ru/api/reservation/${this.$router.currentRoute.value.params.email}`)
                 .then(result => {
                     this.reservation = result.data.data
                     var date = result.data.data.date
