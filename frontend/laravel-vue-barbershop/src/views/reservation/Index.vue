@@ -16,7 +16,7 @@
                 <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
                     <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
                         <div class="lg:col-span-2 lg:py-12">
-                            <p class="max-w-xl text-lg">
+                            <p class="max-w-xl text-neutral-700 text-lg">
                                 Мы уделяем особое внимание каждому клиенту и стремимся создать уютную и дружелюбную
                                 атмосферу в нашем барбершопе. Наши мастера обладают высоким уровнем профессионализма и
                                 мастерски владеют не только классическими, но и современными техниками стрижки и бритья.
@@ -27,7 +27,7 @@
                                     +6 445 3680
                                 </a>
 
-                                <address class="mt-2 not-italic">
+                                <address class="mt-2 text-neutral-700 not-italic">
                                     Пушкинская ул., 107/72, Ростов-на-Дону
                                 </address>
                             </div>
@@ -35,17 +35,17 @@
 
                         <div class="rounded-none bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
                             <form @submit.prevent="confirm" class="space-y-4">
-                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                <div class="grid grid-cols-1 text-neutral-700 gap-4 sm:grid-cols-2">
                                     <div>
                                         <label class="w-full lg:text-xl text-lg mb-2" for="name">Введите имя</label>
-                                        <input class="w-full rounded-none border-gray-200 p-3 text-sm" placeholder="Иван"
+                                        <input class="w-full bg-neutral-50 text-neutral-800 rounded-none border-gray-200 p-3 text-sm" placeholder="Иван"
                                             type="name" id="name" name="name" required v-model="reservation.name"
                                             @keypress.enter.prevent />
                                     </div>
 
                                     <div>
                                         <label class="w-full lg:text-xl text-lg mb-2" for="email">Введите Email</label>
-                                        <input class="w-full rounded-none border-gray-200 p-3 text-sm"
+                                        <input class="w-full rounded-none bg-neutral-50 text-neutral-800 border-gray-200 p-3 text-sm"
                                             placeholder="ivanov@email.com" type="email" id="email" name="email" required
                                             v-model="reservation.email" @keypress.enter.prevent @change="isOpen = false" />
                                     </div>
@@ -56,7 +56,7 @@
                                     Выберите мастера
                                 </h1>
 
-                                <div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
+                                <div class="grid grid-cols-1 gap-4 text-center text-neutral-700 sm:grid-cols-3">
 
                                     <div v-for="master in availableMasters">
                                         <img :src="master.photo" :alt="master.name" border="0" class="mb-2" />
@@ -80,8 +80,8 @@
                                 <div>
                                     <div class="form-control">
                                         <label v-for="service in availableServices" class="label cursor-pointer">
-                                            <span class="label-text">{{ service.title }}</span>
-                                            <input type="checkbox" name="services[]" v-model="reservation.services"
+                                            <span class="label-text text-neutral-800">{{ service.title }}</span>
+                                            <input type="checkbox"  name="services[]" v-model="reservation.services"
                                                 :value="service.id" class="checkbox" @keypress.enter.prevent />
                                         </label>
                                     </div>
@@ -110,7 +110,7 @@
                                             @keypress.enter.prevent />
 
                                         <label :for="`option${time}`"
-                                            class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
+                                            class="block w-full rounded-none border text-neutral-700 border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
                                             tabindex="0">
                                             <span class="text-sm font-medium"> {{ time }}:00 </span>
                                         </label>
@@ -131,7 +131,7 @@
                                             class=" absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50">
                                             <div class="max-w-2xl p-6 bg-white rounded-md shadow-xl">
                                                 <div class="flex content-start justify-between">
-                                                    <h3 class="lg:text-2xl text-xl text-center mt-5">Введите код, который мы отправили
+                                                    <h3 class="lg:text-2xl text-neutral-800 text-xl text-center mt-5">Введите код, который мы отправили
                                                         вам
                                                         на ваш Email: {{ reservation.email }}</h3>
                                                     <button class="btn btn-square lg:ml-10 ml-2 mt-3" type="button"
@@ -145,7 +145,7 @@
                                                 </div>
                                                 <div class="otp w-full flex justify-around mt-10">
                                                     <input ref="firstInputEl" v-model="inputOtpCode" type="number"
-                                                        maxlength="4" class="border rounded w-20 h-10 text-center"
+                                                        maxlength="4" class="border rounded w-20 h-10 text-center bg-neutral-50 text-neutral-800"
                                                         @input="getSubmit(), getCode()" @keypress.enter.prevent />
                                                 </div>
                                                 <div class="absolute invisible" id="wrong">
@@ -161,7 +161,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="mt-5">
-                                                        <p class="text-center">
+                                                        <p class="text-center text-neutral-800">
                                                             Подтверждая, вы даете согласие на обработку персональных данных
                                                             и соглашаетесь
                                                             c политикой конфиденциальности
