@@ -38,14 +38,16 @@
                                 <div class="grid grid-cols-1 text-neutral-700 gap-4 sm:grid-cols-2">
                                     <div>
                                         <label class="w-full lg:text-xl text-lg mb-2" for="name">Введите имя</label>
-                                        <input class="w-full bg-neutral-50 text-neutral-800 rounded-none border-gray-200 p-3 text-sm" placeholder="Иван"
-                                            type="name" id="name" name="name" required v-model="reservation.name"
-                                            @keypress.enter.prevent />
+                                        <input
+                                            class="w-full bg-neutral-50 text-neutral-800 rounded-none border-gray-200 p-3 text-sm"
+                                            placeholder="Иван" type="name" id="name" name="name" required
+                                            v-model="reservation.name" @keypress.enter.prevent />
                                     </div>
 
                                     <div>
                                         <label class="w-full lg:text-xl text-lg mb-2" for="email">Введите Email</label>
-                                        <input class="w-full rounded-none bg-neutral-50 text-neutral-800 border-gray-200 p-3 text-sm"
+                                        <input
+                                            class="w-full rounded-none bg-neutral-50 text-neutral-800 border-gray-200 p-3 text-sm"
                                             placeholder="ivanov@email.com" type="email" id="email" name="email" required
                                             v-model="reservation.email" @keypress.enter.prevent @change="isOpen = false" />
                                     </div>
@@ -59,12 +61,12 @@
                                 <div class="grid grid-cols-1 gap-4 text-center text-neutral-700 sm:grid-cols-3">
 
                                     <div v-for="master in availableMasters">
-                                        <img :src="master.photo" :alt="master.name" border="0" class="mb-2" />
+                                        <img v-if="selectedImg === master.id || desktopDevice > 640" :src="master.photo" :alt="master.name" border="0" class="mb-2" />
                                         <input class="peer sr-only" :id="`option${master.id}`" type="radio"
                                             :value="master.id" tabindex="-1" name="master_id" required
                                             v-model="reservation.master_id" @keypress.enter.prevent />
 
-                                        <label @click="getDate(master.id)" :for="`option${master.id}`"
+                                        <label @click="getDate(master.id), getImage(master.id)" :for="`option${master.id}`"
                                             class="block w-full rounded-none border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
                                             tabindex="0">
                                             <span class="text-sm font-medium"> {{ master.name }} </span>
@@ -81,7 +83,7 @@
                                     <div class="form-control">
                                         <label v-for="service in availableServices" class="label cursor-pointer">
                                             <span class="label-text text-neutral-800">{{ service.title }}</span>
-                                            <input type="checkbox"  name="services[]" v-model="reservation.services"
+                                            <input type="checkbox" name="services[]" v-model="reservation.services"
                                                 :value="service.id" class="checkbox" @keypress.enter.prevent />
                                         </label>
                                     </div>
@@ -131,7 +133,8 @@
                                             class=" absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50">
                                             <div class="max-w-2xl p-6 bg-white rounded-md shadow-xl">
                                                 <div class="flex content-start justify-between">
-                                                    <h3 class="lg:text-2xl text-neutral-800 text-xl text-center mt-5">Введите код, который мы отправили
+                                                    <h3 class="lg:text-2xl text-neutral-800 text-xl text-center mt-5">
+                                                        Введите код, который мы отправили
                                                         вам
                                                         на ваш Email: {{ reservation.email }}</h3>
                                                     <button class="btn btn-square lg:ml-10 ml-2 mt-3" type="button"
@@ -145,7 +148,8 @@
                                                 </div>
                                                 <div class="otp w-full flex justify-around mt-10">
                                                     <input ref="firstInputEl" v-model="inputOtpCode" type="number"
-                                                        maxlength="4" class="border rounded w-20 h-10 text-center bg-neutral-50 text-neutral-800"
+                                                        maxlength="4"
+                                                        class="border rounded w-20 h-10 text-center bg-neutral-50 text-neutral-800"
                                                         @input="getSubmit(), getCode()" @keypress.enter.prevent />
                                                 </div>
                                                 <div class="absolute invisible" id="wrong">
@@ -213,6 +217,8 @@ export default {
             isOpen: false,
             otpCode: null,
             inputOtpCode: null,
+            selectedImg: null,
+            desktopDevice: window.innerWidth
         }
     },
     mounted() {
@@ -220,6 +226,9 @@ export default {
             this.getServices()
     },
     methods: {
+        getImage(id) {
+            this.selectedImg = id
+        },
         getSubmit() {
             document.getElementById("otp").classList.add("absolute", "invisible");
             document.getElementById("wrong").classList.add("absolute", "invisible");
