@@ -22,7 +22,7 @@
 - php artisan schedule:work (Опционально)
 
 В новом терминале 
--npm run dev
+- npm run dev
 
 
 [Админка](http://localhost:8080)
